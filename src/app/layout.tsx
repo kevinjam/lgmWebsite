@@ -6,7 +6,7 @@ import MenuComponent from '../components/Menu';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // Import usePathname
+import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -16,8 +16,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname(); // Get current pathname
-  const isFFCRoute = pathname.startsWith('/ffc'); // Check if route is under /ffc
+  const pathname = usePathname();
+  const isFFCRoute = pathname.startsWith('/ffc');
 
   return (
     <html lang="en">
@@ -29,6 +29,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
       </head>
       <body className={`${inter.className} bg-gray-50`}>
+        <Script
+          src="https://checkout.flutterwave.com/v3.js"
+          strategy="beforeInteractive"
+        />
         {/* Vision Section */}
         <motion.section
           className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-3"
@@ -76,13 +80,10 @@ export default function RootLayout({
             </div>
           </div>
         </motion.section>
-<Script
-          src="https://checkout.flutterwave.com/v3.js"
-          strategy="beforeInteractive"
-        />
+
         {/* Navigation */}
         <header className="sticky top-0 z-50 bg-purple-800 shadow-md">
-          {!isFFCRoute && <MenuComponent />} {/* Render MenuComponent only for non-FFC routes */}
+          {!isFFCRoute && <MenuComponent />}
         </header>
 
         {/* Main Content */}

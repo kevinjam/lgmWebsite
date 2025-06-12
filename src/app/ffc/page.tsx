@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -13,31 +12,6 @@ import FFCNav from '../../components/FFCNav';
 import { CalendarIcon, UsersIcon, HeartIcon } from '@heroicons/react/24/outline';
 
 export default function FFCHome() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Auto-slide for fallback slider (not used since HeroSlider is reused)
-  useEffect(() => {
-    const slideInterval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
-    }, 5000);
-    return () => clearInterval(slideInterval);
-  }, []);
-
-  const slides = [
-    {
-      image: '/images/slider/01.jpg',
-      title: 'Welcome to Faith Family Church',
-      subtitle: 'A vibrant community growing in faith and love.',
-      cta: { text: 'Join Us Sunday', href: '/ffc/events' },
-    },
-    {
-      image: '/images/slider/02.jpg',
-      title: 'Experience God’s Presence',
-      subtitle: 'Worship with us and encounter His glory.',
-      cta: { text: 'Plan Your Visit', href: '/ffc/visit' },
-    },
-  ];
-
   const events = [
     {
       title: 'Sunday Worship Service',
@@ -87,7 +61,7 @@ export default function FFCHome() {
             <span>Next Upcoming Event</span>
           </span>
           <span className="text-center sm:text-left">
-            "{nextEvent.title}" - {nextEvent.pastor}, {nextEvent.time} - {nextEvent.location}
+            {nextEvent.title} - {nextEvent.pastor}, {nextEvent.time} - {nextEvent.location}
           </span>
         </div>
       </section>
@@ -161,10 +135,10 @@ export default function FFCHome() {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <HeartIcon className="w-12 h-12 text-gray-900 mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">God’s Love</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">God&quot;s Love</h3>
               <h4 className="text-sm font-medium text-purple-800 mb-2">Our Beliefs</h4>
               <p className="text-gray-700 text-sm">
-                We believe in the transformative power of God’s love, guiding us to live for His glory and serve others.
+                We believe in the transformative power of God&quot;s love, guiding us to live for His glory and serve others.
               </p>
             </motion.div>
 
@@ -305,13 +279,13 @@ export default function FFCHome() {
               </Link>
               <p className="text-gray-600 text-sm mt-2">Join our community:</p>
               <div className="flex space-x-2 mt-2">
-                <a href="https://facebook.com/lgffc" target="_blank" aria-label="Facebook">
-                  <button className="bg-gray-400 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                <a href="https://facebook.com/lgffc" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <button className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-300">
                     Facebook
                   </button>
                 </a>
-                <a href="https://instagram.com/lgffc" target="_blank" aria-label="Instagram">
-                  <button className="bg-gray-400 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition">
+                <a href="https://instagram.com/lgffc" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <button className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-300">
                     Instagram
                   </button>
                 </a>
