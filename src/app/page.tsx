@@ -218,14 +218,14 @@ export default function Home() {
       {/* Theme Scriptures */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
+          {/* <motion.h2
             className="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
             Theme Scriptures
-          </motion.h2>
+          </motion.h2> */}
           {loading && <p className="text-center text-gray-600">Loading scriptures...</p>}
           {error && <p className="text-center text-red-600">{error}</p>}
           {!loading && scriptures.length > 0 && (
@@ -277,14 +277,14 @@ export default function Home() {
       {/* Core Values */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
+          {/* <motion.h2
             className="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
             Core Values
-          </motion.h2>
+          </motion.h2> */}
           {loading && <p className="text-center text-gray-600">Loading...</p>}
           {error && coreValues.length === 0 && <p className="text-center text-red-600">{error}</p>}
           {coreValues.length > 0 && (
@@ -312,14 +312,7 @@ export default function Home() {
       {/* Ministries */}
       <section className="py-16 bg-gray-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            Ministries
-          </motion.h2>
+         
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {

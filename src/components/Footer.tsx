@@ -47,12 +47,12 @@ export default function Footer() {
           <ul className="space-y-2 text-white text-sm">
             <li className="flex items-center">
               <MapPinIcon className="w-5 h-5 mr-2 text-white" />
-              <span>123 Faith Avenue, Glory City, GC 12345</span>
+              <span>Latter Glory Ministry, Kampala, Uganda Gomotoka Road</span>
             </li>
             <li className="flex items-center">
               <EnvelopeIcon className="w-5 h-5 mr-2 text-white" />
               <a href="mailto:contact@lgm.org" className="hover:text-white transition">
-                contact@lgm.org
+                contact@lgm.ug
               </a>
             </li>
             <li className="flex items-center">

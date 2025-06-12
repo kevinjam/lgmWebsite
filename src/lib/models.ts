@@ -66,6 +66,23 @@ interface ISubscriber {
   createdAt: Date;
 }
 
+interface IYoutubeVideo {
+  title: string;
+  videoId: string;
+  thumbnail: string;
+  duration: string;
+}
+interface ILatestSermon {
+  title: string;
+  videoId: string;
+  thumbnail: string;
+  duration: string;
+  quote: string;
+  reference: string;  
+  speaker:string,
+  date: string;
+}
+
 // Define schemas
 const donationSchema = new Schema<IDonation>({
   name: { type: String, required: true, default: 'Anonymous' },
@@ -128,6 +145,24 @@ const subscriberSchema = new Schema<ISubscriber>({
   createdAt: { type: Date, default: Date.now },
 });
 
+const youtubeVideoSchema = new Schema<IYoutubeVideo>({
+  title: { type: String, required: true },
+  videoId: { type: String, required: true },
+  thumbnail: { type: String, required: true },
+  duration: { type: String, required: true },
+});
+
+const latestSermonSchema = new Schema<ILatestSermon>({
+  title: { type: String, required: true },
+  videoId: { type: String, required: true },
+  thumbnail: { type: String, required: true },
+  duration: { type: String, required: true },
+  quote: { type: String, required: true },
+  reference: { type: String, required: true },
+  speaker: { type: String, required: true },
+  date: { type: String, required: true },
+});
+
 // Define models
 export const Donation: Model<IDonation> = mongoose.models.Donation || mongoose.model<IDonation>('Donation', donationSchema);
 export const MinistrySignup: Model<IMinistrySignup> = mongoose.models.MinistrySignup || mongoose.model<IMinistrySignup>('MinistrySignup', ministrySignupSchema);
@@ -138,3 +173,5 @@ export const CoreValue: Model<ICoreValue> = mongoose.models.CoreValue || mongoos
 export const HeroSlide: Model<IHeroSlide> = mongoose.models.HeroSlide || mongoose.model<IHeroSlide>('HeroSlide', heroSlideSchema, 'hero_slides');
 
 export const Subscriber: Model<ISubscriber> = mongoose.models.Subscriber || mongoose.model<ISubscriber>('Subscriber', subscriberSchema, 'subscribers');
+export const YoutubeVideo: Model<IYoutubeVideo> = mongoose.models.YoutubeVideo || mongoose.model<IYoutubeVideo>('YoutubeVideo', youtubeVideoSchema, 'sermonsyoutube');
+export const LatestSermon: Model<ILatestSermon> = mongoose.models.LatestSermon || mongoose.model<ILatestSermon>('LatestSermon', latestSermonSchema, 'latestsermons');
