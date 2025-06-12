@@ -20,7 +20,7 @@ export default function HeroSlider() {
       image: '/images/slider/02.jpg',
       title: 'Empowering Believers',
       subtitle: 'Equipping the saints for service and revival.',
-      cta: { text: 'Join a Ministry', href: '/ffc' },
+      cta: { text: 'Join a Ministry', href: '/join-ministry' },
     },
     {
       image: '/images/slider/03.jpg',

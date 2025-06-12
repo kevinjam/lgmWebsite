@@ -28,9 +28,98 @@ export default function MenuComponent() {
          <Link href="/ffc" className="text-gray-100 hover:text-white font-medium">
           Faith Family Church
         </Link>
-        <Link href="/sm" className="text-gray-100 hover:text-white font-medium">
-          Students Mission
-        </Link>
+          <Menu as="div" className="relative">
+          <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
+              Students Mission
+            <ChevronDownIcon className="w-4 h-4 ml-1" aria-hidden="true" />
+          </Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute mt-2 w-48 bg-white shadow-lg rounded-md z-50">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/student-mission/about"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    About
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/student-mission/programs"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Programs
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/student-mission/partnerships"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Partnerships
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/student-mission/challenges-plans"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Challenges & Plans
+                  </Link>
+                )}
+              </Menu.Item>
+               <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/student-mission/team"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Team
+                  </Link>
+                )}
+              </Menu.Item>
+               <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/student-mission/join"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Join
+                  </Link>
+                )}
+              </Menu.Item>
+            </Menu.Items>
+          </Transition>
+        </Menu>
+        
+
         <Menu as="div" className="relative">
           <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
             Missions
