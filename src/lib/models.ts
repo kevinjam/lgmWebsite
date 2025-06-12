@@ -52,6 +52,20 @@ interface IHeroSlide {
   createdAt: Date;
 }
 
+export interface Subscriber {
+  email: string;
+  firstName?: string;
+  lastName?: string;
+  createdAt: Date;
+}
+
+interface ISubscriber {
+  name: string;
+  email: string;
+  preference: string;
+  createdAt: Date;
+}
+
 // Define schemas
 const donationSchema = new Schema<IDonation>({
   name: { type: String, required: true, default: 'Anonymous' },
@@ -103,6 +117,17 @@ const heroSlideSchema = new Schema<IHeroSlide>({
   createdAt: { type: Date, default: Date.now },
 });
 
+const subscriberSchema = new Schema<ISubscriber>({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  preference: { 
+    type: String, 
+    required: true, 
+    enum: ['Announcements', 'New Product Offers', 'LGM Media', 'FFC', 'Taiwan', 'GPS'] 
+  },
+  createdAt: { type: Date, default: Date.now },
+});
+
 // Define models
 export const Donation: Model<IDonation> = mongoose.models.Donation || mongoose.model<IDonation>('Donation', donationSchema);
 export const MinistrySignup: Model<IMinistrySignup> = mongoose.models.MinistrySignup || mongoose.model<IMinistrySignup>('MinistrySignup', ministrySignupSchema);
@@ -111,3 +136,5 @@ export const Scripture: Model<IScriptureSchema> = mongoose.models.Scripture || m
 export const VisionMission: Model<IVisionMission> = mongoose.models.VisionMission || mongoose.model<IVisionMission>('VisionMission', visionMissionSchema, 'vision_mission');
 export const CoreValue: Model<ICoreValue> = mongoose.models.CoreValue || mongoose.model<ICoreValue>('CoreValue', coreValueSchema, 'core_values');
 export const HeroSlide: Model<IHeroSlide> = mongoose.models.HeroSlide || mongoose.model<IHeroSlide>('HeroSlide', heroSlideSchema, 'hero_slides');
+
+export const Subscriber: Model<ISubscriber> = mongoose.models.Subscriber || mongoose.model<ISubscriber>('Subscriber', subscriberSchema, 'subscribers');

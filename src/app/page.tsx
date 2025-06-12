@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BookOpenIcon, HeartIcon, ShieldCheckIcon, SparklesIcon, SunIcon, EyeIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { BookOpenIcon, HeartIcon, ShieldCheckIcon, SparklesIcon, SunIcon, EyeIcon, ChevronRightIcon, FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import HeroSlider from '../components/HeroSlider';
 
 interface Scripture {
@@ -23,6 +23,11 @@ interface CoreValue {
   icon: string;
 }
 
+interface ImageData {
+  src: string;
+  alt: string;
+}
+
 const iconMap: { [key: string]: React.ComponentType<{ className: string }> } = {
   HeartIcon,
   ShieldCheckIcon,
@@ -32,12 +37,130 @@ const iconMap: { [key: string]: React.ComponentType<{ className: string }> } = {
   EyeIcon,
 };
 
+// Image Card Component
+const ImageCard = ({ src, alt, onClick }: { src: string; alt: string; onClick: () => void }) => (
+  <div
+    className="relative aspect-[4/3] overflow-hidden rounded-lg shadow cursor-pointer"
+    onClick={onClick}
+    role="button"
+    tabIndex={0}
+    aria-label={`View ${alt} in larger size`}
+    onKeyDown={(e) => e.key === 'Enter' && onClick()}
+  >
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className="object-cover transition hover:scale-105"
+      placeholder="blur"
+      blurDataURL={`${src}-blur.jpg`}
+    />
+  </div>
+);
+
+// Content Card Component
+const ContentCard = ({ icon, title, text }: { icon: React.ReactNode; title: string; text?: string }) => (
+  <div className="rounded-lg border-l-4 border-purple-500 bg-white p-4 shadow">
+    <div className="mb-2 flex items-center gap-2">
+      {icon}
+      <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+    </div>
+    <p className="text-gray-600 text-sm">{text}</p>
+  </div>
+);
+
+// Image Modal Component
+const ImageModal = ({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
+  // Focus trap
+  useEffect(() => {
+    const focusableElements = modalRef.current?.querySelectorAll('button');
+    const firstElement = focusableElements?.[0];
+    if (firstElement && typeof (firstElement as HTMLElement).focus === 'function') {
+      (firstElement as HTMLElement).focus();
+    }
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key === 'Tab' && focusableElements) {
+        const lastElement = focusableElements[focusableElements.length - 1];
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          //firstElement.focus();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleTab);
+    return () => window.removeEventListener('keydown', handleTab);
+  }, []);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        ref={modalRef}
+        className="relative bg-white rounded-lg max-w-4xl w-full mx-4 p-4"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-label="Image preview"
+      >
+        <button
+          className="absolute top-2 right-2 p-1 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition"
+          onClick={onClose}
+          aria-label="Close image preview"
+        >
+          <XMarkIcon className="w-5 h-5" />
+        </button>
+        <div className="relative w-full h-[80vh] max-h-[600px]">
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export default function Home() {
   const [scriptures, setScriptures] = useState<Scripture[]>([]);
   const [visionMission, setVisionMission] = useState<VisionMission | null>(null);
   const [coreValues, setCoreValues] = useState<CoreValue[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
+
+  const openModal = useCallback((src: string, alt: string) => {
+    setSelectedImage({ src, alt });
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setSelectedImage(null);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -101,7 +224,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            Our Theme Scriptures
+            Theme Scriptures
           </motion.h2>
           {loading && <p className="text-center text-gray-600">Loading scriptures...</p>}
           {error && <p className="text-center text-red-600">{error}</p>}
@@ -126,71 +249,28 @@ export default function Home() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            className="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            Our Calling
-          </motion.h2>
-          {loading && <p className="text-center text-gray-600">Loading...</p>}
-          {error && !visionMission && <p className="text-center text-red-600">{error}</p>}
-          {visionMission && (
-            <div className="grid gap-6 lg:grid-cols-2 items-start">
-              <motion.div
-                className="space-y-6"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="p-6 bg-white rounded-xl shadow-md bg-gradient-to-r from-purple-50 to-white">
-                  <h3 className="text-xl font-semibold text-purple-800 mb-2">Vision</h3>
-                  <p className="text-gray-600 text-sm line-clamp-3">{visionMission.vision}</p>
-                </div>
-                <div className="flex items-center justify-center">
-                  <HeartIcon className="h-6 w-6 text-purple-400" />
-                  <div className="h-px bg-purple-200 flex-1 mx-2"></div>
-                  <HeartIcon className="h-6 w-6 text-purple-400" />
-                </div>
-                <div className="p-6 bg-white rounded-xl shadow-md bg-gradient-to-r from-purple-50 to-white">
-                  <h3 className="text-xl font-semibold text-purple-800 mb-2">Mission</h3>
-                  <p className="text-gray-600 text-sm line-clamp-3">{visionMission.mission}</p>
-                </div>
-              </motion.div>
-              <motion.div
-                className="relative flex justify-center lg:justify-end"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="relative w-64 h-64">
-                  <Image
-                    src="/images/mission-vision.jpg"
-                    alt="Community worship"
-                    width={200}
-                    height={150}
-                    className="absolute top-0 left-0 rounded-xl shadow-md object-cover hover:scale-105 transition-transform"
-                    placeholder="blur"
-                    blurDataURL="/images/mission-vision-placeholder.png"
-                    loading="lazy"
-                  />
-                  <Image
-                    src="/images/mission.jpg"
-                    alt="Ministry outreach"
-                    width={200}
-                    height={150}
-                    className="absolute bottom-0 right-0 rounded-xl shadow-md object-cover hover:scale-105 transition-transform"
-                    placeholder="blur"
-                    blurDataURL="/images/mission-placeholder.png"
-                    loading="lazy"
-                  />
-                </div>
-              </motion.div>
+      <section className="py-8 bg-gray-50">
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+            {/* Images */}
+            <div className="lg:w-2/5 space-y-4">
+              <ImageCard
+                src="/images/lgm/2nd-anniversary.png"
+                alt="Worship team"
+                onClick={() => openModal('/images/lgm/2nd-anniversary.png', 'Worship team')}
+              />
             </div>
-          )}
+
+            {/* Content */}
+            <div className="lg:w-3/5">
+              {loading ? <p className="text-gray-500">Loading...</p> : error ? <p className="text-red-500">{error}</p> : (
+                <div className="space-y-4">
+                  <ContentCard icon={<EyeIcon className="h-5 w-5 text-purple-600" />} title="Vision" text={visionMission?.vision} />
+                  <ContentCard icon={<FlagIcon className="h-5 w-5 text-purple-600" />} title="Mission" text={visionMission?.mission} />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -203,7 +283,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            Our Core Values
+            Core Values
           </motion.h2>
           {loading && <p className="text-center text-gray-600">Loading...</p>}
           {error && coreValues.length === 0 && <p className="text-center text-red-600">{error}</p>}
@@ -238,7 +318,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            Our Ministries
+            Ministries
           </motion.h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -246,13 +326,13 @@ export default function Home() {
                 name: 'Faith Family Church',
                 desc: 'A vibrant community for worship and fellowship.',
                 href: '/ffc',
-                img: '/images/ffc.jpg',
+                img: '/images/slider/04.png',
               },
               {
                 name: 'Student Mission',
                 desc: 'Empowering young leaders for Christ.',
                 href: '/student-mission',
-                img: '/images/student-mission.jpg',
+                img: '/images/sm/student-mission.jpeg',
               },
               {
                 name: 'Marketplace Ministry',
@@ -268,16 +348,25 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <Image
-                  src={ministry.img}
-                  alt={ministry.name}
-                  width={400}
-                  height={200}
-                  className="w-full h-48 object-cover"
-                  placeholder="blur"
-                  blurDataURL={`${ministry.img.split('.')[0]}-placeholder.png`}
-                  loading="lazy"
-                />
+                <div
+                  className="cursor-pointer"
+                  onClick={() => openModal(ministry.img, ministry.name)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View ${ministry.name} image in larger size`}
+                  onKeyDown={(e) => e.key === 'Enter' && openModal(ministry.img, ministry.name)}
+                >
+                  <Image
+                    src={ministry.img}
+                    alt={ministry.name}
+                    width={400}
+                    height={200}
+                    className="w-full h-48 object-cover transition hover:scale-105"
+                    placeholder="blur"
+                    blurDataURL={`${ministry.img.split('.')[0]}-placeholder.png`}
+                    loading="lazy"
+                  />
+                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">{ministry.name}</h3>
                   <p className="text-gray-600 mb-4">{ministry.desc}</p>
@@ -293,6 +382,17 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Image Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <ImageModal
+            src={selectedImage.src}
+            alt={selectedImage.alt}
+            onClose={closeModal}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
