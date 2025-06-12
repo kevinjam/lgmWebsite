@@ -1,4 +1,30 @@
-@import "tailwindcss";
+@import "tailwindcss";  
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Customize react-slick dots */
+.slick-dots li button:before {
+  color: #790da3 !important;
+  font-size: 12px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #790da3 !important;
+  opacity: 1;
+}
+
+/* @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 
 :root {
   --background: #ffffff;
@@ -18,9 +44,13 @@
     --foreground: #ededed;
   }
 }
-
 body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+/* body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
