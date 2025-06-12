@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import MenuComponent from '../../../components/Menu';
-import Footer from '../../../components/Footer';
 import type { NextPage } from 'next';
 
 const JoinPage: NextPage = () => {
@@ -61,10 +59,6 @@ const JoinPage: NextPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-purple-800 shadow-md">
-        <MenuComponent />
-      </header>
 
       {/* Main Content */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-purple-800 text-white">
@@ -182,9 +176,6 @@ const JoinPage: NextPage = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

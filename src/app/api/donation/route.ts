@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase, Donation } from '../../../lib/mongodb';
+import { connectToDatabase } from '../../../lib/mongodb';
+import { Donation } from '@/lib/models';
 
 export async function POST(request: Request) {
   try {

@@ -2,18 +2,13 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import MenuComponent from '../../../components/Menu';
-import Footer from '../../../components/Footer';
 import Image from 'next/image';
 import type { NextPage } from 'next';
 
 const AboutPage: NextPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-purple-800 shadow-md">
-        <MenuComponent />
-      </header>
+
 
       {/* Hero Section */}
       <section className="relative py-12 bg-gradient-to-b from-purple-900 to-purple-700 text-white">
@@ -82,9 +77,6 @@ const AboutPage: NextPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };
