@@ -1,15 +1,14 @@
 "use client";
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import HeroSlider from '../../components/HeroSlider';
-import Footer from '../../components/Footer';
 import Sermon from '../../components/Sermon';
 import LatestNews from '../../components/LatestNews';
 import Youtube from '../../components/Youtube';
 import FFCNav from '../../components/FFCNav';
 import { CalendarIcon, UsersIcon, HeartIcon } from '@heroicons/react/24/outline';
+import Gallery from '@/components/Gallery';
 
 export default function FFCHome() {
   const events = [
@@ -29,12 +28,6 @@ export default function FFCHome() {
     },
   ];
 
-  const galleryImages = [
-    '/images/gallery/ffc01.jpg',
-    '/images/gallery/ffc02.jpg',
-    '/images/gallery/ffc03.jpg',
-    '/images/gallery/ffc04.jpg',
-  ];
 
   const nextEvent = {
     title: 'Revival Night',
@@ -201,144 +194,12 @@ export default function FFCHome() {
       </section>
 
       {/* Galleries */}
-      <section className="py-8 sm:py-12 bg-gray-100">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
-            Our Community in Action
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {galleryImages.map((image, index) => (
-              <div key={index} className="relative w-full h-40 sm:h-48">
-                <Image
-                  src={image}
-                  alt={`Gallery image ${index + 1}`}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  className="rounded-lg"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+     <Gallery/>
       {/* Connect with Us */}
-      <section className="py-8 sm:py-12 bg-gray-100">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-lg sm:text-xl text-gray-900 mb-6 text-center">
-            Connect with Us
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Have a Question */}
-            <motion.div
-              className="bg-white rounded-lg shadow-md p-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="relative w-full h-40 mb-4">
-                <Image
-                  src="/images/gallery/ffc01.jpg"
-                  alt="Have a Question"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Have a Question?</h3>
-              <p className="text-gray-700 text-sm mb-4">Our team is here to assist you.</p>
-              <Link href="/ffc/contact">
-                <button className="bg-purple-800 text-white px-4 py-2 rounded-full hover:bg-purple-900 transition">
-                  Contact Us
-                </button>
-              </Link>
-            </motion.div>
-
-            {/* Want to Stay in the Loop */}
-            <motion.div
-              className="bg-white rounded-lg shadow-md p-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="relative w-full h-40 mb-4">
-                <Image
-                  src="/images/gallery/ffc02.jpg"
-                  alt="Stay in the Loop"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Stay in the Loop</h3>
-              <p className="text-gray-700 text-sm mb-4">Subscribe to our newsletter and follow us on social media.</p>
-              <Link href="/subscribe-tvn">
-                <button className="bg-purple-600 text-white px-4 py-2 rounded-full hover:bg-purple-700 transition">
-                  Subscribe
-                </button>
-              </Link>
-              <p className="text-gray-600 text-sm mt-2">Join our community:</p>
-              <div className="flex space-x-2 mt-2">
-                <a href="https://facebook.com/lgffc" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                  <button className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-300">
-                    Facebook
-                  </button>
-                </a>
-                <a href="https://instagram.com/lgffc" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <button className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-300">
-                    Instagram
-                  </button>
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Sidebar Navigation */}
-            <motion.div
-              className="bg-purple-600 rounded-lg shadow-md text-white p-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="space-y-2">
-                <h4 className="text-lg font-semibold">Explore</h4>
-                <Link href="/ffc/events" className="block text-sm hover:underline">Events</Link>
-                <Link href="/ffc/contact" className="block text-sm hover:underline">Contact Us</Link>
-                <Link href="/sm" className="block text-sm hover:underline">Student Mission</Link>
-              </div>
-              <div className="mt-4 space-y-2">
-                <h4 className="text-lg font-semibold">Locations</h4>
-                <Link href="/ffc/ntinda" className="block text-sm hover:underline">Ntinda</Link>
-                <Link href="/ffc/nakawuka" className="block text-sm hover:underline">Nakawuka</Link>
-              </div>
-              <div className="mt-4 space-y-2">
-                <h4 className="text-lg font-semibold">Ministries</h4>
-                <Link href="/ffc/ministries/youth" className="block text-sm hover:underline">Youth</Link>
-                <Link href="/ffc/ministries/children" className="block text-sm hover:underline">Children</Link>
-                <Link href="/ffc/ministries/married" className="block text-sm hover:underline">Married Couples</Link>
-              </div>
-              <div className="mt-4 space-y-2">
-                <Link href="/ffc/services" className="block text-sm hover:underline flex items-center">
-                  <CalendarIcon className="w-5 h-5 mr-2" />
-                  Join Us In-Person
-                </Link>
-                <Link href="https://radio.latterglory.com/ffc" target="_blank" className="block text-sm hover:underline flex items-center">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h18M3 12h18m-7 7h7" />
-                  </svg>
-                  Join Us Online
-                </Link>
-                <Link href="/ffc/give" className="block text-sm hover:underline flex items-center">
-                  <HeartIcon className="w-5 h-5 mr-2" />
-                  Give Online
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

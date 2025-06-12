@@ -10,7 +10,7 @@ export default function FFCNav() {
   return (
     <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
       {/* Logo */}
-      <Link href="/ffc" className="flex items-center">
+      <Link href="/" className="flex items-center">
         <Image
           src="/logo/logo.png"
           alt="Faith Family Church Logo"
@@ -22,7 +22,7 @@ export default function FFCNav() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex flex-1 justify-center items-center space-x-6">
-        <Link href="/ffc" className="text-gray-100 hover:text-white font-medium">
+        <Link href="/" className="text-gray-100 hover:text-white font-medium">
           Home
         </Link>
         <Link href="/ffc/about" className="text-gray-100 hover:text-white font-medium">

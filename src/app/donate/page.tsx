@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { PhoneIcon, CreditCardIcon, BanknotesIcon } from '@heroicons/react/24/outline';
+import type { NextPage } from 'next';
 
 // Define Flutterwave response interface
 interface FlutterwaveResponse {
@@ -27,7 +28,7 @@ interface FlutterwaveWindow extends Window {
   }) => void;
 }
 
-export default function Donate() {
+const DonatePage: NextPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [amount, setAmount] = useState('');
@@ -36,7 +37,7 @@ export default function Donate() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleFlutterwaveSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -65,7 +66,7 @@ export default function Donate() {
           customizations: {
             title: 'Latter Glory Ministries',
             description: 'Donation to support our mission',
-            logo: '/logo/logo.png',
+            logo: '/images/logo.png',
           },
           callback: async (response: FlutterwaveResponse) => {
             if (response.status === 'successful') {
@@ -80,6 +81,7 @@ export default function Donate() {
                     message: message || null,
                     txRef,
                     status: 'success',
+                    method: 'Flutterwave',
                   }),
                 });
 
@@ -117,44 +119,44 @@ export default function Donate() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
 
       {/* Hero Section */}
-      <section className="relative py-16 bg-gradient-to-b from-purple-900 to-purple-700 text-white">
-        <div className="max-w-6xl mx-auto px-4 text-center">
+      <section className="py-16 bg-gradient-to-b from-purple-900 to-purple-700 text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
-            className="text-4xl sm:text-5xl font-bold mb-4"
+            className="text-3xl sm:text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Give to Transform Lives
+            Support Our Mission
           </motion.h1>
           <motion.p
-            className="text-lg sm:text-xl max-w-3xl mx-auto mb-8"
+            className="text-base sm:text-lg max-w-2xl mx-auto mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Your donation to Latter Glory Ministries fuels our mission to spread the gospel, empower communities, and support those in need. Every gift makes an eternal impact.
+            Your generous donation to Latter Glory Ministries helps spread the gospel, uplift communities, and transform lives.
           </motion.p>
         </div>
       </section>
 
-      {/* Donation Form */}
+      {/* Donation Section */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Form */}
+          {/* Donation Form */}
           <motion.div
-            className="bg-white rounded-lg shadow-lg p-8"
+            className="bg-white rounded-2xl shadow-xl p-6 sm:p-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Make a Donation</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Donate Online</h2>
             {success && (
               <motion.div
-                className="mb-4 p-4 bg-green-100 text-green-700 rounded"
+                className="mb-4 p-4 bg-green-100 text-green-700 rounded-lg text-sm"
                 role="alert"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -165,7 +167,7 @@ export default function Donate() {
             )}
             {error && (
               <motion.div
-                className="mb-4 p-4 bg-red-100 text-gray-700 rounded"
+                className="mb-4 p-4 bg-red-100 text-red-700 rounded-lg text-sm"
                 role="alert"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -174,7 +176,7 @@ export default function Donate() {
                 {error}
               </motion.div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleFlutterwaveSubmit} className="space-y-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                   Name (Optional)
@@ -184,7 +186,7 @@ export default function Donate() {
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600"
+                  className="mt-1.5 w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-purple-600 transition text-sm"
                   placeholder="John Doe"
                   aria-label="Donor name"
                 />
@@ -198,25 +200,25 @@ export default function Donate() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600"
+                  className="mt-1.5 w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-purple-600 transition text-sm"
                   placeholder="you@example.com"
                   aria-label="Email address"
                 />
               </div>
               <div>
                 <label htmlFor="amount" className="block text-sm font-medium text-gray-700">
-                  Donation Amount (UGX)
+                  Donation Amount (UGX) <span className="text-red-500">*</span>
                 </label>
-                <div className="mt-2 flex space-x-2">
+                <div className="mt-2 flex flex-wrap gap-2">
                   {[1000, 5000, 10000].map((preset) => (
                     <button
                       key={preset}
                       type="button"
                       onClick={() => setAmount(preset.toString())}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
                         amount === preset.toString()
                           ? 'bg-purple-600 text-white'
-                          : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
+                          : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                       }`}
                       aria-label={`Select ${preset} UGX`}
                     >
@@ -232,7 +234,7 @@ export default function Donate() {
                   min="1"
                   step="1"
                   required
-                  className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600"
+                  className="mt-2 w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-purple-600 transition text-sm"
                   placeholder="Enter custom amount"
                   aria-label="Donation amount in UGX"
                 />
@@ -243,74 +245,99 @@ export default function Donate() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  rows={4}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600"
+                  rows={3}
+                  className="mt-1.5 w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-purple-600 transition text-sm"
                   placeholder="Your support means the world..."
                   aria-label="Donation message"
                 />
               </div>
-              <button
+              <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
-                aria-label="Donate now"
+                className="w-full py-2 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 disabled:bg-gray-800 disabled:cursor-not-allowed transition"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {loading ? 'Processing...' : 'Donate Now'}
-              </button>
+              </motion.button>
             </form>
           </motion.div>
 
-          {/* Impact Info */}
+          {/* Alternative Donation Methods */}
           <motion.div
-            className="flex flex-col justify-center"
+            className="space-y-4"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Your Gift Changes Lives</h3>
-            <p className="text-gray-600 mb-6">
-              At Latter Glory Ministries, your donation supports:
-            </p>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <svg className="w-6 h-6 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Spreading the gospel through outreach and media.</span>
-              </li>
-              <li className="flex items-start">
-                <svg className="w-6 h-6 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Providing food, clothing, and education to the needy.</span>
-              </li>
-              <li className="flex items-start">
-                <svg className="w-6 h-6 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Building vibrant churches and community programs.</span>
-              </li>
-            </ul>
-            <div className="mt-8">
-              <Image
-                src="/images/gallery/pastory.png"
-                alt="LGM community outreach"
-                width={400}
-                height={300}
-                className="rounded-lg object-cover"
-                loading="lazy"
-              />
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Other Ways to Donate</h2>
+
+            {/* Call Us */}
+            <div className="bg-white rounded-2xl shadow-xl p-6">
+              <div className="flex items-center mb-3">
+                <PhoneIcon className="w-6 h-6 text-purple-600 mr-2" aria-hidden="true" />
+                <h3 className="text-lg font-semibold text-gray-900">Call Us</h3>
+              </div>
+              <p className="text-gray-600 text-sm">
+                For phone donations, please call our dedicated line:
+              </p>
+              <p className="mt-2 text-purple-600 font-medium text-sm">
+                <a href="tel:+256392175191" className="hover:underline">+256 392 175 191</a>
+              </p>
+            </div>
+
+            {/* MTN MoMo */}
+            <div className="bg-white rounded-2xl shadow-xl p-6">
+              <div className="flex items-center mb-3">
+                <CreditCardIcon className="w-6 h-6 text-purple-600 mr-2" aria-hidden="true" />
+                <h3 className="text-lg font-semibold text-gray-900">Donate via MTN MoMo</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">
+                Send your donation to MoMo code <strong>316453</strong>. Follow these steps:
+              </p>
+              <ol className="text-gray-600 text-sm list-decimal pl-4 space-y-1">
+                <li>Dial *165# on your MTN line.</li>
+                <li>Select “Payments”.</li>
+                <li>Choose “Pay Merchant” and enter code <strong>316453</strong>.</li>
+                <li>Enter amount and confirm with your PIN.</li>
+                <li>Save the transaction ID from the confirmation SMS.</li>
+              </ol>
+              <p className="mt-3 text-gray-600 text-sm">
+                After sending, please contact us at{' '}
+                <a href="tel:+256782664592" className="text-purple-600 hover:underline">+256 782 664 592</a> with your transaction ID to confirm your donation.
+              </p>
+            </div>
+
+            {/* Bank Account */}
+            <div className="bg-white rounded-2xl shadow-xl p-6">
+              <div className="flex items-center mb-3">
+                <BanknotesIcon className="w-6 h-6 text-purple-600 mr-2" aria-hidden="true" />
+                <h3 className="text-lg font-semibold text-gray-900">Bank Transfer</h3>
+              </div>
+              <p className="text-gray-600 text-sm mb-3">
+                Donate directly to our bank account:
+              </p>
+              <ul className="text-gray-600 text-sm space-y-1">
+                <li><strong>Bank:</strong> Standard Chartered Bank</li>
+                <li><strong>Account Number:</strong> 0152002456600</li>
+                <li><strong>Account Name:</strong> Latter Glory Ministries</li>
+                <li><strong>Branch:</strong> Kampala Main Branch</li>
+                <li><strong>SWIFT Code:</strong> SCBLUGKA (for international transfers)</li>
+                <li><strong>Bank Address:</strong> Plot 5, Speke Road, Kampala, Uganda</li>
+              </ul>
+              <p className="mt-3 text-gray-600 text-sm">
+                For international payments, please include your name and “Donation” in the transfer reference. Contact us at{' '}
+                <a href="tel:+256392175191" className="text-purple-600 hover:underline">+256 392 175 191</a> for assistance.
+              </p>
             </div>
           </motion.div>
         </div>
       </section>
-
-
-
-      {/* Footer */}
-
     </div>
   );
-}
+};
+
+export default DonatePage;
