@@ -108,14 +108,14 @@ export default function Registration() {
   };
 
   const handleShare = () => {
-    const shareMessage = `Hey, register to attend 25 Silver Jubilee Celebration\nhttps://faithfamilychurch.org/registration\nCelebrate 25 years of ministry with a special jubilee service, music, and community fellowship.`;
+    const shareMessage = `Hey, register to attend 25 Silver Jubilee Celebration\nhttps://latterglory.ug/registration\nCelebrate 25 years of ministry with a special jubilee service, music, and community fellowship.`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
 
     if (navigator.share) {
       navigator.share({
         title: '25 Silver Jubilee Celebration',
         text: shareMessage,
-        url: 'https://faithfamilychurch.org/registration',
+        url: 'https://latterglory.ug/registration',
       }).catch((error) => console.error('Error sharing:', error));
     } else {
       window.open(whatsappUrl, '_blank');
