@@ -1,148 +1,109 @@
-"use client"
+import Link from 'next/link';
+import FFCNav from '@/components/FFCNav';
+import { EventDetailsClient } from './ClientComponents';
 
-import Head from 'next/head';
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+interface Event {
+  _id: string;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+  image: string;
+  isUpcoming: boolean;
+}
 
-export default function EventDetails() {
-  const params = useParams();
-  const id = params?.id ? Number(params.id) : null;
-  const [event, setEvent] = useState<{
-    id: number;
-    title: string;
-    date: string;
-    time: string;
-    location: string;
-    description: string;
-    image: string;
-  } | null>(null);
-
-  useEffect(() => {
-    if (id === null) return;
-
-    // Mock data (replace with API call in a real app)
-    const mockEvents = [
-      {
-        id: 1,
-        title: '25th Anniversary Celebration',
-        date: 'December 15, 2025',
-        time: '6:00 PM - 10:00 PM EAT',
-        location: 'Vine Grounds, Kampala',
-        description: 'Join us to celebrate 25 years of God’s faithfulness and glory with worship, testimonies, and a special service.',
-        image: '/images/anniversary-event.jpeg',
-      },
-      {
-        id: 2,
-        title: 'Coming Home Celebration',
-        date: 'December 15, 2025',
-        time: '6:00 PM - 10:00 PM EAT',
-        location: 'Faith Family Church, Kampala',
-        description: 'Join us to celebrate 25 years of God’s faithfulness and glory with worship, testimonies, and a special service.',
-        image: '/images/anniversary-event.jpeg',
-      },
-      {
-        id: 3,
-        title: '25 Silver Jubilee',
-        date: 'July 6, 2025',
-        time: '10:00 AM - 2:00 PM EAT',
-        location: 'Vine International Christian Academy, Kungu',
-        description: 'Celebrate 25 years of ministry with a special jubilee service, music, and community fellowship.',
-        image: '/images/anniversary-event.jpeg',
-      },
-      {
-        id: 4,
-        title: 'Alumni Reunion',
-        date: 'December 31, 2024 - January 1, 2025',
-        time: '6:00 PM - 5:00 AM EAT',
-        location: 'Faith Family Church, Kampala',
-        description: 'A powerful night of prayer to welcome the New Year with faith and thanksgiving.',
-        image: '/images/night-of-prayer.jpg',
-      },
-    ];
-    const foundEvent = mockEvents.find(e => e.id === id);
-    if (foundEvent) {
-      setEvent(foundEvent);
-    } else {
-      setEvent(null); // Keeps loading state or can redirect
+async function fetchEvent(id: string): Promise<Event | null> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/events/${id}`, {
+      cache: 'no-store',
+    });
+    if (!res.ok) {
+      return null;
     }
-  }, [id]);
+    return await res.json();
+  } catch (error) {
+    console.error('Error fetching event:', error);
+    return null;
+  }
+}
 
-  if (!event) return <div className="text-center py-20">Loading...</div>;
+export default async function EventDetails({ params }: { params: Promise<{ id: string }> }) {
+ const { id } = await params;
+  const event = await fetchEvent(id);
 
-  return (
+  const Placeholder = () => (
     <div className="min-h-screen bg-gray-50">
-
-            {/* <Header/> */}
-      <Head>
-        <title>Events - Latter Glory Ministries</title>
-        <meta name="description" content="Explore upcoming and past events at Latter Glory Ministries, including the 25th Anniversary and Night of Prayer." />
-      </Head>
-
-      {/* Hero Section */}
-       {/* <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-600 to-blue-600">
-        <div className="absolute inset-0 bg-opacity-10 bg-black" />
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-             <span className="text-yellow-300">{event.title}</span>
-            <meta name="description" content={event.description} />
-          </h1>
-          <p className="text-xl text-gray-100 max-w-3xl mx-auto">
-            Join Latter Glory Ministries for transformative events that unite our global community in faith and worship.
-          </p>
-        </div>
-      </section>  */}
-
-
-      {/* <Head>
-        <title>{event.title} - Latter Glory Ministries</title>
-        <meta name="description" content={event.description} />
-      </Head> */}
-
-   
-
+      <FFCNav />
       <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative h-96 mb-8">
-            <Image
-              src={event.image}
-              alt={event.title}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
-            />
+        <div className="max-w-5xl mx-auto">
+          <div className="h-12 bg-gray-200 rounded w-32 mb-6 animate-pulse"></div>
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <div className="relative h-96 bg-gray-200 animate-pulse"></div>
+            <div className="p-8">
+              <div className="h-10 bg-gray-200 rounded w-3/4 mb-6 animate-pulse"></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <div className="h-5 bg-gray-200 rounded w-1/2 mb-3 animate-pulse"></div>
+                  <div className="h-5 bg-gray-200 rounded w-1/2 mb-3 animate-pulse"></div>
+                  <div className="h-5 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+                </div>
+                <div className="h-5 bg-gray-200 rounded w-1/3 animate-pulse"></div>
+              </div>
+              <div className="h-4 bg-gray-200 rounded w-full mb-2 animate-pulse"></div>
+              <div className="h-4 bg-gray-200 rounded w-full mb-2 animate-pulse"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+            </div>
           </div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Details</h2>
-          <p className="text-gray-600 mb-4">{event.description}</p>
-          <p className="text-gray-600 mb-2"><strong>Date:</strong> {event.date}</p>
-          <p className="text-gray-600 mb-2"><strong>Time:</strong> {event.time}</p>
-          <p className="text-gray-600 mb-4"><strong>Location:</strong> {event.location}</p>
-
-          {/* Add to Calendar */}
-          <a
-            href={`https://www.google.com/calendar/render?action=TEMPLATE&text=${event.title}&dates=${new Date(event.date.split(' - ')[0]).toISOString().replace(/-|:|\.\d+Z$/g, '')}/${new Date(event.date.split(' - ')[1] || event.date).toISOString().replace(/-|:|\.\d+Z$/g, '')}&location=${encodeURIComponent(event.location)}&details=${encodeURIComponent(event.description)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors mb-4"
-          >
-            Add to Calendar
-          </a>
-
-          {/* Location Map (Static Google Maps Example) */}
-          <div className="relative h-64 w-full mb-4">
-            <iframe
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              className="rounded-lg"
-            ></iframe>
+          <div className="text-center mt-8">
+            <div className="h-6 bg-gray-200 rounded w-40 mx-auto animate-pulse"></div>
           </div>
         </div>
       </section>
-      {/* <Footer/> */}
     </div>
   );
+
+  if (!event) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <FFCNav />
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto">
+            <h1 className="text-4xl font-extrabold text-gray-900 mb-6 text-center">
+              Event Not Found
+            </h1>
+            <p className="text-lg text-gray-600 mb-8 text-center">
+              The event you are looking for could not be found. Please check the URL or explore other events.
+            </p>
+            <Placeholder />
+            <div className="text-center mt-8">
+              <Link
+                href="/ffc/events"
+                className="inline-flex items-center bg-purple-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-purple-700 transition duration-300"
+              >
+                View All Events
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <FFCNav />
+      <EventDetailsClient event={event} />
+    </div>
+  );
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const event = await fetchEvent(id);
+  return {
+    title: event ? `${event.title} - Latter Glory Ministries` : 'Event Not Found',
+    description: event ? event.description : 'Event not found.',
+  };
 }
