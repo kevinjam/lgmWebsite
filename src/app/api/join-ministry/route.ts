@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
     await connectToDatabase();
 
     const { name, email, phoneNumber, ministry } = await request.json();
+    console.log('Received signup data:', { name, email, phoneNumber, ministry });
 
     if (!name || !email || !phoneNumber || !ministry) {
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
     }
 
     const signup = await MinistrySignup.create({
-      name,
+    name,
       email,
       phoneNumber,
       ministry,

@@ -8,7 +8,8 @@ import { ChevronDownIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outli
 
 export default function FFCNav() {
   return (
-    <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-purple-800 shadow-md">
+ <nav className="container mx-auto px-4 py-4 flex items-center justify-between ">
       {/* Logo */}
       <Link href="/" className="flex items-center">
         <Image
@@ -242,5 +243,7 @@ export default function FFCNav() {
         </Menu>
       </div>
     </nav>
+    </header>
+   
   );
 }

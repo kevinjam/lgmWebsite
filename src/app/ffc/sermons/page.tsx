@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import FFCNav from '../../../components/FFCNav';
-import Footer from '../../../components/Footer';
 
 export default function Sermons() {
   const [sermons, setSermons] = useState<
@@ -115,9 +114,9 @@ export default function Sermons() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-purple-800 shadow-md">
+      {/* <header className="sticky top-0 z-50 bg-purple-800 shadow-md"> */}
         <FFCNav />
-      </header>
+      {/* </header> */}
 
       {/* Main Content */}
       <main className="flex-grow">
@@ -245,7 +244,7 @@ export default function Sermons() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
