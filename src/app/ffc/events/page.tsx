@@ -141,7 +141,7 @@ export default function Events() {
               {filteredEvents
                 .filter(event => !event.isUpcoming)
                 .map(event => (
-                  <Link key={event._id} href={`/events/${event._id}`} passHref>
+                  <Link key={event._id} href={`/ffc/events/${event._id}`} passHref>
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:shadow-xl cursor-pointer">
                       <div className="relative h-48">
                         {loading ? (

@@ -9,13 +9,11 @@ if (!MONGODB_URI) {
 let cachedConnection: typeof mongoose | null = null;
 
 export async function connectToDatabase() {
-  if (cachedConnection) {
-    return cachedConnection;
-  }
+  if (cachedConnection) return cachedConnection;
 
   try {
     const connection = await mongoose.connect(MONGODB_URI, {
-      bufferCommands: false,
+      serverSelectionTimeoutMS: 5000,
     });
     cachedConnection = connection;
     console.log('MongoDB connected');

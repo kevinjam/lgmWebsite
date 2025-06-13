@@ -319,7 +319,7 @@ export default function Home() {
                 name: 'Faith Family Church',
                 desc: 'A vibrant community for worship and fellowship.',
                 href: '/ffc',
-                img: '/images/slider/04.png',
+                img: '/images/slider/04.jpg',
               },
               {
                 name: 'Student Mission',
@@ -331,7 +331,7 @@ export default function Home() {
                 name: 'Marketplace Ministry',
                 desc: 'Bringing faith to the workplace.',
                 href: '/marketplace',
-                img: '/images/marketplace.jpg',
+                img: '/images/lgm/community-outreach.png',
               },
             ].map((ministry, index) => (
               <motion.div

@@ -117,6 +117,15 @@ interface IPrayerRequest {
   createdAt: Date;
 }
 
+interface ILeaders{
+  name: string;
+  email: string;
+  title: string;
+  bio: string;
+  image: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 
 
@@ -234,6 +243,14 @@ const prayerRequestSchema = new Schema<IPrayerRequest>({
   createdAt: { type: Date, default: Date.now },
 });
 
+const leadersSchema = new Schema<ILeaders>({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  title: { type: String, required: true },
+  bio: { type: String, required: true },
+  image: { type: String, required: true },    
+});
+
 // Define models
 export const Donation: Model<IDonation> = mongoose.models.Donation || mongoose.model<IDonation>('Donation', donationSchema);
 export const MinistrySignup: Model<IMinistrySignup> = mongoose.models.MinistrySignup || mongoose.model<IMinistrySignup>('MinistrySignup', ministrySignupSchema);
@@ -249,3 +266,5 @@ export const LatestSermon: Model<ILatestSermon> = mongoose.models.LatestSermon |
 export const Event: Model<IEvent> = mongoose.models.Event || mongoose.model<IEvent>('Event', EventSchema, 'events');
 export const Ministry: Model<IMinistry> = mongoose.models.Ministry || mongoose.model<IMinistry>('Ministry', ministrySchema, 'ministries');
 export const PrayerRequest: Model<IPrayerRequest> = mongoose.models.PrayerRequest || mongoose.model<IPrayerRequest>('PrayerRequest', prayerRequestSchema, 'prayer_requests');
+
+export const Leaders: Model<ILeaders> = mongoose.models.Leaders || mongoose.model<ILeaders>('Leaders', leadersSchema, 'leaders');

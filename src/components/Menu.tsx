@@ -175,7 +175,7 @@ export default function MenuComponent() {
           </Transition>
         </Menu>
         <Link href="/marketplace" className="text-gray-100 hover:text-white font-medium">
-          Marketplace Ministry
+          Marketplace
         </Link>
         <Link href="https://sandbox.flutterwave.com/donate/uw5iwqtsg5i4"
                         target="_blank" rel='noopener noreferrer' className="text-gray-100 hover:text-white font-medium">

@@ -26,24 +26,10 @@ export default function FFCNav() {
         <Link href="/" className="text-gray-100 hover:text-white font-medium">
           Home
         </Link>
-        <Link href="/ffc/about" className="text-gray-100 hover:text-white font-medium">
-          About Us
-        </Link>
-        <Link href="/ffc/sermons" className="text-gray-100 hover:text-white font-medium">
-          Sermons
-        </Link>
-        <Link href="/ffc/events" className="text-gray-100 hover:text-white font-medium">
-          Events
-        </Link>
-        <Link href="/ffc/ministries" className="text-gray-100 hover:text-white font-medium">
-          Ministries
-        </Link>
-        <Link href="/ffc/media" className="text-gray-100 hover:text-white font-medium">
-          Media
-        </Link>
-        <Menu as="div" className="relative">
+
+ <Menu as="div" className="relative">
           <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
-            Satellite Churches
+             About Us
             <ChevronDownIcon className="w-4 h-4 ml-1" aria-hidden="true" />
           </Menu.Button>
           <Transition
@@ -59,7 +45,74 @@ export default function FFCNav() {
               <Menu.Item>
                 {({ active }) => (
                   <Link
-                    href="/ffc/nakawuka"
+                    href="/ffc/about/who-we-are/"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Who we are
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/ffc/about/our-leaders"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Our Leaders
+                  </Link>
+                )}
+              </Menu.Item>
+               {/* <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="#"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Our Leaders
+                  </Link>
+                )}
+              </Menu.Item> */}
+            </Menu.Items>
+          </Transition>
+        </Menu>        
+    
+        <Link href="/ffc/sermons" className="text-gray-100 hover:text-white font-medium">
+          Sermons
+        </Link>
+        <Link href="/ffc/events" className="text-gray-100 hover:text-white font-medium">
+          Events
+        </Link>
+        <Link href="/ffc/ministries" className="text-gray-100 hover:text-white font-medium">
+          Ministries
+        </Link>
+        <Link href="https://radio.latterglory.ug/ " target="_blank" rel="noopener noreferrer" className="text-gray-100 hover:text-white font-medium">
+          Media
+        </Link>
+        <Menu as="div" className="relative">
+          <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
+            Churches
+            <ChevronDownIcon className="w-4 h-4 ml-1" aria-hidden="true" />
+          </Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute mt-2 w-48 bg-white shadow-lg rounded-md z-50">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                   href="https://nakawuka.latterglory.ug/ " target="_blank" rel="noopener noreferrer"
                     className={`${
                       active ? 'bg-purple-100' : ''
                     } block px-4 py-2 text-gray-700`}
@@ -71,7 +124,7 @@ export default function FFCNav() {
               <Menu.Item>
                 {({ active }) => (
                   <Link
-                    href="/ffc/ntinda"
+                    href="https://ntinda.latterglory.ug/ " target="_blank" rel="noopener noreferrer"
                     className={`${
                       active ? 'bg-purple-100' : ''
                     } block px-4 py-2 text-gray-700`}
@@ -179,7 +232,9 @@ export default function FFCNav() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/ffc/media"
+                        href="https://radio.latterglory.ug/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className={`${
                           active ? 'bg-purple-100' : ''
                         } block px-4 py-2 text-gray-700`}
@@ -191,7 +246,7 @@ export default function FFCNav() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/ffc/nakawuka"
+                        href="https://nakawuka.latterglory.ug/ " target="_blank" rel="noopener noreferrer"
                         className={`${
                           active ? 'bg-purple-100' : ''
                         } block px-4 py-2 text-gray-700`}
@@ -203,7 +258,7 @@ export default function FFCNav() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/ffc/ntinda"
+                         href="https://ntinda.latterglory.ug/ " target="_blank" rel="noopener noreferrer"
                         className={`${
                           active ? 'bg-purple-100' : ''
                         } block px-4 py-2 text-gray-700`}
