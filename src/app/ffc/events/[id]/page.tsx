@@ -35,7 +35,7 @@ export default async function EventDetails({ params }: { params: Promise<{ id: s
 
   const Placeholder = () => (
     <div className="min-h-screen bg-gray-50">
-      <FFCNav />
+      {/* <FFCNav /> */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="h-12 bg-gray-200 rounded w-32 mb-6 animate-pulse"></div>

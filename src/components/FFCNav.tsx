@@ -140,7 +140,7 @@ export default function FFCNav() {
           Contact Us
         </Link>
         <Link href="/donate" className="text-gray-100 hover:text-white font-medium">
-          Donate
+          Give
         </Link>
       </div>
 
@@ -287,7 +287,7 @@ export default function FFCNav() {
                           active ? 'bg-purple-100' : ''
                         } block px-4 py-2 text-gray-700`}
                       >
-                        Donate
+                        Give
                       </Link>
                     )}
                   </Menu.Item>

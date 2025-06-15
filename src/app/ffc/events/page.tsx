@@ -1,6 +1,6 @@
 "use client";
 
-import Head from 'next/head';
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -63,10 +63,10 @@ export default function Events() {
   return (
     <div className="min-h-screen bg-gray-50">
       <FFCNav />
-      <Head>
+      {/* <Head>
         <title>Events - Latter Glory Ministries</title>
         <meta name="description" content="Explore upcoming and past events at Latter Glory Ministries, including the 25th Anniversary and Night of Prayer." />
-      </Head>
+      </Head> */}
 
       {/* Search Bar */}
       <section className="py-8 px-4 sm:px-6 lg:px-8">
