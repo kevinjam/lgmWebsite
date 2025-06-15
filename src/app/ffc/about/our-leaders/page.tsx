@@ -90,6 +90,7 @@ export default function OurLeaders() {
         />
       </Head>
       <FFCNav />
+      
 
       {/* Hero Section */}
       <section className="relative h-72 w-full overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 rounded-b-[40px] flex items-center justify-center">

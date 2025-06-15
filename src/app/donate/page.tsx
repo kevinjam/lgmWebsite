@@ -114,10 +114,10 @@ const DonatePage = () => {
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-sm text-gray-600">Send to number:</p>
-                            <p className="text-lg font-mono font-bold">0758 123 456</p>
+                            <p className="text-lg font-mono font-bold">0756 623 877</p>
                           </div>
                           <button
-                            onClick={() => copyToClipboard('0758123456', 'Airtel Number')}
+                            onClick={() => copyToClipboard('0756623877', 'Airtel Number')}
                             className="text-purple-600 hover:text-purple-800 flex items-center text-sm"
                           >
                             <DocumentDuplicateIcon className="w-4 h-4 mr-1" />

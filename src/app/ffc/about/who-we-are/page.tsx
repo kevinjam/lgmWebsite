@@ -15,6 +15,8 @@ export default function WhoWeAre() {
       </Head>
       <FFCNav />
 
+      
+
       {/* Hero Section */}
       <section className="relative h-80 w-full overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 rounded-b-[50px]">
         <div className="absolute inset-0 flex items-center justify-center text-center p-4">

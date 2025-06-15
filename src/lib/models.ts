@@ -194,6 +194,15 @@ export interface IBookPurchase  {
   updatedAt: Date;
 }
 
+export interface IContact{
+  name: string;
+  email: string;
+  phone?: string;
+  subject?: string;
+  message: string;
+  createdAt: Date;
+}
+
 // Define schemas
 const donationSchema = new Schema<IDonation>({
   name: { type: String, required: true, default: 'Anonymous' },
@@ -379,6 +388,18 @@ const MarketPlaceMinistryInterestSchema: Schema<IMarketPlaceMinistryInterest> = 
   date: { type: Date, default: Date.now },
 });
 
+const ContactSchema = new Schema<IContact>(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String },
+    subject: { type: String },
+    message: { type: String, required: true }
+  },
+  { timestamps: true }
+);
+
+
 // Define models
 export const Donation: Model<IDonation> = mongoose.models.Donation || mongoose.model<IDonation>('Donation', donationSchema);
 export const MinistrySignup: Model<IMinistrySignup> = mongoose.models.MinistrySignup || mongoose.model<IMinistrySignup>('MinistrySignup', ministrySignupSchema);
@@ -403,3 +424,5 @@ export const ForeignMissionInterest: Model<IForeignMissionInterest> = mongoose.m
 export const CommunityEmpowermentInterest: Model<ICommunityEmpowermentInterest> = mongoose.models.CommunityEmpowermentInterest || mongoose.model<ICommunityEmpowermentInterest>('CommunityEmpowermentInterest', CommunityEmpowermentInterestSchema, 'community_empowerment_interests');
 export const MarketPlaceMinistryInterest: Model<IMarketPlaceMinistryInterest> = mongoose.models.MarketPlaceMinistryInterest || mongoose.model<IMarketPlaceMinistryInterest>('MarketPlaceMinistryInterest', MarketPlaceMinistryInterestSchema, 'market_place_ministry_interests');
 export const BookPurchase: Model<IBookPurchase> = mongoose.models.BookPurchase || mongoose.model<IBookPurchase>('BookPurchase', BookPurchaseSchema, 'book_purchases');
+
+export const Contact: Model<IContact> = mongoose.models.Contact || mongoose.model<IContact>('Contact', ContactSchema, 'contacts');
