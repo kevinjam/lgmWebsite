@@ -26,9 +26,7 @@ export default function MenuComponent() {
         <Link href="/" className="text-gray-100 hover:text-white font-medium">
           Home
         </Link>
-        <Link href="/ffc" className="text-gray-100 hover:text-white font-medium">
-          Faith Family Church
-        </Link>
+       
         <Menu as="div" className="relative">
           <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
             Students Mission
@@ -158,6 +156,9 @@ export default function MenuComponent() {
         <Link href="/market-place-ministry" className="text-gray-100 hover:text-white font-medium">
           Marketplace
         </Link>
+         <Link href="/ffc" className="text-gray-100 hover:text-white font-medium">
+          Faith Family Church
+        </Link>
         <Link href="/donate" className="text-gray-100 hover:text-white font-medium">
           Give
         </Link>
@@ -171,7 +172,7 @@ export default function MenuComponent() {
             className="flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
           >
       
-            Book &quot;[All Yours]&quot; Now
+             PreOrder Book Now
           </Link>
         </motion.div>
       </div>
@@ -224,16 +225,6 @@ export default function MenuComponent() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/ffc"
-                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
-                      >
-                        Faith Family Church
-                      </Link>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
                         href="/missions/local"
                         className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
@@ -258,6 +249,16 @@ export default function MenuComponent() {
                         className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Community Empowerment
+                      </Link>
+                    )}
+                  </Menu.Item>
+                         <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href="/ffc"
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
+                      >
+                        Faith Family Church
                       </Link>
                     )}
                   </Menu.Item>
@@ -294,7 +295,7 @@ export default function MenuComponent() {
                           height={20}
                           className="mr-2"
                         />
-                        Book &quot;[All Yours]&quot; Now
+                        PreOrder Book Now
                       </Link>
                     )}
                   </Menu.Item>

@@ -29,7 +29,7 @@ export default function ForeignMissions() {
     {
       id: 4,
       src: "https://www.youtube.com/embed/I9bY8dlltTY",
-      title: "Tainan Spiritual Food Church"
+      title: "Spiritual Warfare"
     }
   ];
 

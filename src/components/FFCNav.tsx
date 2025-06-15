@@ -27,7 +27,7 @@ export default function FFCNav() {
           Home
         </Link>
 
- <Menu as="div" className="relative">
+         <Menu as="div" className="relative">
           <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
              About Us
             <ChevronDownIcon className="w-4 h-4 ml-1" aria-hidden="true" />
@@ -181,18 +181,49 @@ export default function FFCNav() {
                       </Link>
                     )}
                   </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        href="/ffc/about"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
-                      >
-                        About Us
-                      </Link>
-                    )}
-                  </Menu.Item>
+                  <Menu as="div" className="relative">
+          <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
+             About Us
+            <ChevronDownIcon className="w-4 h-4 ml-1" aria-hidden="true" />
+          </Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute mt-2 w-48 bg-white shadow-lg rounded-md z-50">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/ffc/about/who-we-are/"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Who we are
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/ffc/about/our-leaders"
+                    className={`${
+                      active ? 'bg-purple-100' : ''
+                    } block px-4 py-2 text-gray-700`}
+                  >
+                    Our Leaders
+                  </Link>
+                )}
+              </Menu.Item>
+         
+            </Menu.Items>
+          </Transition>
+        </Menu>  
                   <Menu.Item>
                     {({ active }) => (
                       <Link

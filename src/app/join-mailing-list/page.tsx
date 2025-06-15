@@ -71,7 +71,7 @@ export default function JoinMailingList() {
         className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 text-center"
       >
         {/* <h2 className="text-2xl font-semibold text-blue-900">Welcome to the LGM Family</h2> */}
-        <p className="mt-4 text-base text-blue-900 leading-relaxed">
+        <p className="mt-4 text-base text-gray-900 leading-relaxed">
          Join our mailing list to receive uplifting messages, ministry updates, and opportunities to grow in faith as part of our global community.
         </p>
       </motion.section>
@@ -86,14 +86,14 @@ export default function JoinMailingList() {
         <div className="bg-white rounded-xl shadow-lg p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-blue-900">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-900">
                 Name *
               </label>
               <input
                 id="name"
                 type="text"
                 {...register('name', { required: 'Name is required' })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-blue-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                 placeholder="Your Name"
               />
               {errors.name && (
@@ -101,7 +101,7 @@ export default function JoinMailingList() {
               )}
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-blue-900">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-900">
                 Email Address *
               </label>
               <input
@@ -114,7 +114,7 @@ export default function JoinMailingList() {
                     message: 'Invalid email address',
                   },
                 })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-blue-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                 placeholder="you@example.com"
               />
               {errors.email && (
