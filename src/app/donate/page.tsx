@@ -232,7 +232,7 @@ const DonatePage = () => {
                       </p>
                       
                       {/* PayPal Donation Button - Replace with your actual PayPal button code */}
-                      <form action="https://www.paypal.com/donate" method="post" target="_blank" className="w-full">
+                      <form action="https://www.paypal.com/ncp/payment/YYPSPLDDB97GN" method="post" target="_blank" className="w-full">
                         <input type="hidden" name="business" value="donations@latterglory.org" />
                         <input type="hidden" name="item_name" value="Latter Glory Ministries Donation" />
                         <input type="hidden" name="currency_code" value="USD" />
