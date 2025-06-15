@@ -125,16 +125,17 @@ export default function Registration() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans relative">
       {/* Hero Section with Slide Animation and Share Button */}
+
       <section className="relative w-full overflow-hidden">
-        <div className="animate-slide bg-gradient-to-r from-purple-600 to-blue-600 h-40 flex items-center justify-center relative">
+        <div className="animate-slide  bg-gradient-to-br from-purple-900 to-blue-800 h-40 flex items-center justify-center relative">
           <div className="text-center px-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-white">Registration</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white">Registration</h1>
             <p className="text-lg text-white opacity-90 mt-2">Silver Jubilee Celebration - Latter Glory Ministries</p>
           </div>
           <button
             type="button"
             onClick={handleShare}
-            className="absolute top-4 right-4 bg-green-600 text-white p-2 rounded-full hover:bg-green-700 transition w-10 h-10 flex items-center justify-center md:w-auto md:p-2 md:rounded-lg md:px-4 md:top-6 md:right-6"
+            className="absolute top-4 right-4 bg-purple-500 text-white p-2 rounded-full hover:bg-green-700 transition w-10 h-10 flex items-center justify-center md:w-auto md:p-2 md:rounded-lg md:px-4 md:top-6 md:right-6"
           >
             <svg
               className="w-6 h-6 md:mr-2"
@@ -204,7 +205,7 @@ export default function Registration() {
               {/* 3. Children Attending */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  3. Children (10 years & below) Count
+                  3. How many children 10years and below do you plan to come with?
                 </label>
                 <input
                   type="number"
@@ -220,7 +221,7 @@ export default function Registration() {
               {/* 4. Event Time */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  4. Event Time Commitment
+                  4. What time do you plan to arrive?
                 </label>
                 <select
                   name="eventTime"
@@ -238,7 +239,7 @@ export default function Registration() {
               {/* 5. Book Launch */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  5. Book Launch (UGX 25,000 each)
+                  5.  For the Book Launch, select an option below
                 </label>
                 <select
                   name="bookLaunch"
@@ -361,7 +362,7 @@ export default function Registration() {
               {/* 9. Hear About Event */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  9. Heard About Event Via?
+                  9. How did you hear about this event?
                 </label>
                 <select
                   name="hearAboutEvent"
@@ -380,7 +381,7 @@ export default function Registration() {
               {/* 10. Receive Info */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  10. Prefer Info Updates Via? <span className="text-red-500">*</span>
+                  10. How can we contact you in future? (include an option for don’t contact me) <span className="text-red-500">*</span>
                 </label>
                 <div className="space-y-2">
                   <label className="flex items-center">

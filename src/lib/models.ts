@@ -127,7 +127,72 @@ interface ILeaders{
   updatedAt?: Date;
 }
 
+interface IPartnership {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  location: string;
+  message: string;
+  date: Date;
+}
 
+// Volunteer Model
+export interface IVolunteer {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  location: string;
+  skills: string;
+  availability: string;
+  date: Date;
+}
+
+// Local Mission Interest Model
+export interface ILocalMissionInterest{
+  name: string;
+  email: string;
+  phoneNumber: string;
+  location: string;
+  date: Date;
+}
+
+export interface IForeignMissionInterest {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  country: string;
+  date: Date;
+}
+
+// Community Empowerment Interest Model
+export interface ICommunityEmpowermentInterest {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  location: string;
+  date: Date;
+}
+
+export interface IMarketPlaceMinistryInterest {
+  name: string;
+  email: string;
+  occupation: string;
+  location: string;
+  date: Date;
+}
+
+// Book Purchase Model
+export interface IBookPurchase  {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  quantity: number;
+  paymentMethod: string;
+  amount: number;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 // Define schemas
 const donationSchema = new Schema<IDonation>({
@@ -251,6 +316,69 @@ const leadersSchema = new Schema<ILeaders>({
   image: { type: String, required: true },    
 });
 
+const PartnershipSchema: Schema<IPartnership> = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  location: { type: String, required: true },
+  message: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+});
+
+const VolunteerSchema: Schema<IVolunteer> = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  location: { type: String, required: true },
+  skills: { type: String, required: true },
+  availability: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+});
+
+const LocalMissionInterestSchema: Schema<ILocalMissionInterest> = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  location: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+});
+
+const ForeignMissionInterestSchema: Schema<IForeignMissionInterest> = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  country: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+});
+const CommunityEmpowermentInterestSchema: Schema<ICommunityEmpowermentInterest> = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  location: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+});
+
+const BookPurchaseSchema = new Schema<IBookPurchase>(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
+    quantity: { type: Number, required: true, default: 1 },
+    paymentMethod: { type: String, required: true, enum: ['mtn', 'airtel'] },
+    amount: { type: Number, required: true },
+    status: { type: String, default: 'pending', enum: ['pending', 'completed', 'failed'] }
+  },
+  { timestamps: true }
+);
+
+const MarketPlaceMinistryInterestSchema: Schema<IMarketPlaceMinistryInterest> = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  occupation: { type: String, required: true },
+  location: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+});
+
 // Define models
 export const Donation: Model<IDonation> = mongoose.models.Donation || mongoose.model<IDonation>('Donation', donationSchema);
 export const MinistrySignup: Model<IMinistrySignup> = mongoose.models.MinistrySignup || mongoose.model<IMinistrySignup>('MinistrySignup', ministrySignupSchema);
@@ -268,3 +396,10 @@ export const Ministry: Model<IMinistry> = mongoose.models.Ministry || mongoose.m
 export const PrayerRequest: Model<IPrayerRequest> = mongoose.models.PrayerRequest || mongoose.model<IPrayerRequest>('PrayerRequest', prayerRequestSchema, 'prayer_requests');
 
 export const Leaders: Model<ILeaders> = mongoose.models.Leaders || mongoose.model<ILeaders>('Leaders', leadersSchema, 'leaders');
+export const Partnership: Model<IPartnership> = mongoose.models.Partnership || mongoose.model<IPartnership>('Partnership', PartnershipSchema, 'partnerships');
+export const Volunteer: Model<IVolunteer> = mongoose.models.Volunteer || mongoose.model<IVolunteer>('Volunteer', VolunteerSchema, 'volunteers');
+export const LocalMissionInterest: Model<ILocalMissionInterest> = mongoose.models.LocalMissionInterest || mongoose.model<ILocalMissionInterest>('LocalMissionInterest', LocalMissionInterestSchema, 'local_mission_interests');
+export const ForeignMissionInterest: Model<IForeignMissionInterest> = mongoose.models.ForeignMissionInterest || mongoose.model<IForeignMissionInterest>('ForeignMissionInterest', ForeignMissionInterestSchema, 'foreign_mission_interests');
+export const CommunityEmpowermentInterest: Model<ICommunityEmpowermentInterest> = mongoose.models.CommunityEmpowermentInterest || mongoose.model<ICommunityEmpowermentInterest>('CommunityEmpowermentInterest', CommunityEmpowermentInterestSchema, 'community_empowerment_interests');
+export const MarketPlaceMinistryInterest: Model<IMarketPlaceMinistryInterest> = mongoose.models.MarketPlaceMinistryInterest || mongoose.model<IMarketPlaceMinistryInterest>('MarketPlaceMinistryInterest', MarketPlaceMinistryInterestSchema, 'market_place_ministry_interests');
+export const BookPurchase: Model<IBookPurchase> = mongoose.models.BookPurchase || mongoose.model<IBookPurchase>('BookPurchase', BookPurchaseSchema, 'book_purchases');

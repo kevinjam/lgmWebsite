@@ -68,12 +68,12 @@ export default function WhoWeAre() {
             <div className="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold text-purple-600 mb-2">Volunteer</h3>
               <p className="text-gray-600 mb-4">Serve in our ministries and make a difference in our community.</p>
-              <Link href="/volunteer" className="text-purple-600 hover:underline">Learn More</Link>
+              <Link href="/ffc/volunteer" className="text-purple-600 hover:underline">Learn More</Link>
             </div>
             <div className="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold text-purple-600 mb-2">Partner With Us</h3>
               <p className="text-gray-600 mb-4">Join hands with us to expand our mission worldwide.</p>
-              <Link href="/partnership" className="text-purple-600 hover:underline">Learn More</Link>
+              <Link href="/ffc/partnership" className="text-purple-600 hover:underline">Learn More</Link>
             </div>
             <div className="p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold text-purple-600 mb-2">Donate</h3>

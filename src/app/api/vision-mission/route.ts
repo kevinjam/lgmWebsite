@@ -5,12 +5,10 @@ import { VisionMission } from '../../../lib/models';
 export async function GET() {
   try {
     await connectToDatabase();
-    console.log('Fetching vision and mission');
     const visionMission = await VisionMission.findOne({}).lean();
     if (!visionMission) {
       return NextResponse.json({ error: 'Vision and mission not found' }, { status: 404 });
     }
-    console.log('Found visionMission:', visionMission);
     return NextResponse.json(visionMission, { status: 200 });
   } catch (error) {
     console.error('Error fetching vision and mission:', error);

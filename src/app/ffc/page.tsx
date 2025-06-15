@@ -78,7 +78,7 @@ export default function FFCHome() {
           >
             At Faith Family Church, we are a family united in Christ, dedicated to worship, discipleship, and serving our community. Join us as we grow closer to God and one another in love and faith.
           </motion.p>
-          <Link href="/ffc/about">
+          <Link href="/ffc/about/who-we-are" className="inline-block">
             <button className="bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-900 transition">
               Learn More About Us
             </button>
