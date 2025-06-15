@@ -5,6 +5,7 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronDownIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 
 export default function MenuComponent() {
   return (
@@ -25,12 +26,12 @@ export default function MenuComponent() {
         <Link href="/" className="text-gray-100 hover:text-white font-medium">
           Home
         </Link>
-         <Link href="/ffc" className="text-gray-100 hover:text-white font-medium">
+        <Link href="/ffc" className="text-gray-100 hover:text-white font-medium">
           Faith Family Church
         </Link>
-          <Menu as="div" className="relative">
+        <Menu as="div" className="relative">
           <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
-              Students Mission
+            Students Mission
             <ChevronDownIcon className="w-4 h-4 ml-1" aria-hidden="true" />
           </Menu.Button>
           <Transition
@@ -47,9 +48,7 @@ export default function MenuComponent() {
                 {({ active }) => (
                   <Link
                     href="/student-mission/about"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     About
                   </Link>
@@ -59,9 +58,7 @@ export default function MenuComponent() {
                 {({ active }) => (
                   <Link
                     href="/student-mission/programs"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Programs
                   </Link>
@@ -71,9 +68,7 @@ export default function MenuComponent() {
                 {({ active }) => (
                   <Link
                     href="/student-mission/partnerships"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Partnerships
                   </Link>
@@ -83,33 +78,27 @@ export default function MenuComponent() {
                 {({ active }) => (
                   <Link
                     href="/student-mission/challenges-plans"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Challenges & Plans
                   </Link>
                 )}
               </Menu.Item>
-               <Menu.Item>
+              <Menu.Item>
                 {({ active }) => (
                   <Link
                     href="/student-mission/team"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Team
                   </Link>
                 )}
               </Menu.Item>
-               <Menu.Item>
+              <Menu.Item>
                 {({ active }) => (
                   <Link
                     href="/student-mission/join"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Join
                   </Link>
@@ -118,8 +107,6 @@ export default function MenuComponent() {
             </Menu.Items>
           </Transition>
         </Menu>
-        
-
         <Menu as="div" className="relative">
           <Menu.Button className="text-gray-100 hover:text-white font-medium flex items-center">
             Missions
@@ -139,9 +126,7 @@ export default function MenuComponent() {
                 {({ active }) => (
                   <Link
                     href="/missions/local"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Local
                   </Link>
@@ -151,9 +136,7 @@ export default function MenuComponent() {
                 {({ active }) => (
                   <Link
                     href="/missions/foreign"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Foreign
                   </Link>
@@ -162,10 +145,8 @@ export default function MenuComponent() {
               <Menu.Item>
                 {({ active }) => (
                   <Link
-                    href="/missions/community"
-                    className={`${
-                      active ? 'bg-purple-100' : ''
-                    } block px-4 py-2 text-gray-700`}
+                    href="/missions/community-empowerment"
+                    className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                   >
                     Community Empowerment
                   </Link>
@@ -174,13 +155,25 @@ export default function MenuComponent() {
             </Menu.Items>
           </Transition>
         </Menu>
-        <Link href="/marketplace" className="text-gray-100 hover:text-white font-medium">
+        <Link href="/market-place-ministry" className="text-gray-100 hover:text-white font-medium">
           Marketplace
         </Link>
-        <Link href="https://sandbox.flutterwave.com/donate/uw5iwqtsg5i4"
-                        target="_blank" rel='noopener noreferrer' className="text-gray-100 hover:text-white font-medium">
+        <Link href="/donate" className="text-gray-100 hover:text-white font-medium">
           Give
         </Link>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="ml-4"
+        >
+          <Link
+            href="/book-launch"
+            className="flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+          >
+      
+            Book &quot;[All Yours]&quot; Now
+          </Link>
+        </motion.div>
       </div>
 
       {/* Mobile Menu Toggle */}
@@ -212,9 +205,7 @@ export default function MenuComponent() {
                     {({ active }) => (
                       <Link
                         href="/"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Home
                       </Link>
@@ -224,9 +215,7 @@ export default function MenuComponent() {
                     {({ active }) => (
                       <Link
                         href="/sm"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Students Mission
                       </Link>
@@ -236,9 +225,7 @@ export default function MenuComponent() {
                     {({ active }) => (
                       <Link
                         href="/ffc"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Faith Family Church
                       </Link>
@@ -248,9 +235,7 @@ export default function MenuComponent() {
                     {({ active }) => (
                       <Link
                         href="/missions/local"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Local Missions
                       </Link>
@@ -260,9 +245,7 @@ export default function MenuComponent() {
                     {({ active }) => (
                       <Link
                         href="/missions/foreign"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Foreign Missions
                       </Link>
@@ -271,10 +254,8 @@ export default function MenuComponent() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/missions/community"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        href="/missions/community-empowerment"
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Community Empowerment
                       </Link>
@@ -283,10 +264,8 @@ export default function MenuComponent() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/marketplace"
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        href="/market-place-ministry"
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Marketplace Ministry
                       </Link>
@@ -295,13 +274,27 @@ export default function MenuComponent() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="https://sandbox.flutterwave.com/donate/uw5iwqtsg5i4"
-                        target="_blank" rel='noopener noreferrer'
-                        className={`${
-                          active ? 'bg-purple-100' : ''
-                        } block px-4 py-2 text-gray-700`}
+                        href="/donate"
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700`}
                       >
                         Give
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href="/book-launch"
+                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700 flex items-center`}
+                      >
+                        <Image
+                          src="/images/book/all_yours_icon.png"
+                          alt="Book Icon"
+                          width={20}
+                          height={20}
+                          className="mr-2"
+                        />
+                        Book &quot;[All Yours]&quot; Now
                       </Link>
                     )}
                   </Menu.Item>

@@ -57,66 +57,65 @@ export default function JoinMinistry() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Header */}
-
+    <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Hero Section */}
-      <section className="relative py-12 bg-gradient-to-b from-purple-900 to-purple-700 text-white">
-        <div className="max-w-6xl mx-auto px-4 text-center">
+      <section className="relative py-16 bg-gradient-to-b from-purple-900 to-purple-700 text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
-            className="text-3xl sm:text-4xl font-bold mb-4"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
             Join a Ministry
           </motion.h1>
           <motion.p
-            className="text-base sm:text-lg max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
             Become part of our mission to spread the gospel and serve communities. Join a ministry today!
           </motion.p>
         </div>
+        <div className="absolute inset-0 bg-black/20" /> {/* Subtle overlay for contrast */}
       </section>
 
       {/* Form Section */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="py-10 px-4 sm:px-6 lg:px-8 flex-grow">
         <div className="max-w-md mx-auto">
           <motion.div
-            className="bg-white rounded-lg shadow-lg p-6"
-            initial={{ opacity: 0, y: 20 }}
+            className="bg-white rounded-xl shadow-2xl p-6 sm:p-8"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-xl font-semibold text-gray-900 mb-4 text-center">Sign Up</h2>
+            {/* <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Sign Up</h2> */}
             {success && (
               <motion.div
-                className="mb-4 p-3 bg-green-100 text-green-700 rounded text-sm"
+                className="mb-5 p-3 bg-green-100 text-green-700 rounded-lg text-center text-base"
                 role="alert"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.4 }}
               >
                 {success}
               </motion.div>
             )}
             {error && (
               <motion.div
-                className="mb-4 p-3 bg-red-100 text-gray-700 rounded text-sm"
+                className="mb-5 p-3 bg-red-100 text-red-700 rounded-lg text-center text-base"
                 role="alert"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.4 }}
               >
                 {error}
               </motion.div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                   Full Name
                 </label>
                 <input
@@ -124,14 +123,14 @@ export default function JoinMinistry() {
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600 text-sm"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-purple-600 text-base"
                   placeholder="John Doe"
                   aria-label="Full name"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                   Email
                 </label>
                 <input
@@ -139,14 +138,14 @@ export default function JoinMinistry() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600 text-sm"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-purple-600 text-base"
                   placeholder="you@example.com"
                   aria-label="Email address"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
                   Phone Number
                 </label>
                 <input
@@ -154,7 +153,7 @@ export default function JoinMinistry() {
                   id="phoneNumber"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600 text-sm"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-purple-600 text-base"
                   placeholder="+256700123456"
                   aria-label="Phone number"
                   pattern="^\+256\d{9}$"
@@ -162,14 +161,14 @@ export default function JoinMinistry() {
                 />
               </div>
               <div>
-                <label htmlFor="ministry" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="ministry" className="block text-sm font-medium text-gray-700 mb-2">
                   Select Ministry
                 </label>
                 <select
                   id="ministry"
                   value={ministry}
                   onChange={(e) => setMinistry(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-purple-600 focus:border-purple-600 text-sm"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-purple-600 text-base appearance-none bg-white"
                   aria-label="Select ministry"
                   required
                 >
@@ -182,7 +181,7 @@ export default function JoinMinistry() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition text-sm"
+                className="w-full sm:w-auto px-6 py-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition text-base mx-auto block"
                 aria-label="Join ministry"
               >
                 {loading ? 'Submitting...' : 'Join Now'}
@@ -191,9 +190,6 @@ export default function JoinMinistry() {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-
     </div>
   );
 }
