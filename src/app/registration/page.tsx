@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 
 type FormData = {
   fullName: string;
@@ -15,6 +15,12 @@ type FormData = {
   hearAboutEvent: string;
   receiveInfo: string[];
 };
+
+declare global {
+  interface Window {
+    Swal?: typeof import('sweetalert2')['default'];
+  }
+}
 
 export default function Registration() {
   const [formData, setFormData] = useState<FormData>({
@@ -34,7 +40,18 @@ export default function Registration() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
-  const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    // Load SweetAlert2 script dynamically
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -95,8 +112,20 @@ export default function Registration() {
           hearAboutEvent: '',
           receiveInfo: [],
         });
-        setShowToast(true);
-        setTimeout(() => setShowToast(false), 5000);
+        // Show SweetAlert2 modal
+        if (window.Swal) {
+          window.Swal.fire({
+            title: 'Thank You!',
+            text: 'Thank you for registering, we shall get back to you.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#471396',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/';
+            }
+          });
+        }
       } else {
         setError(data.message || 'Failed to register. Please try again.');
       }
@@ -125,9 +154,8 @@ export default function Registration() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans relative">
       {/* Hero Section with Slide Animation and Share Button */}
-
       <section className="relative w-full overflow-hidden">
-        <div className="animate-slide  bg-gradient-to-br from-purple-900 to-blue-800 h-40 flex items-center justify-center relative">
+        <div className="animate-slide bg-gradient-to-br from-purple-900 to-blue-800 h-40 flex items-center justify-center relative">
           <div className="text-center px-4">
             <h1 className="text-4xl sm:text-5xl font-bold text-white">Registration</h1>
             <p className="text-lg text-white opacity-90 mt-2">Silver Jubilee Celebration - Latter Glory Ministries</p>
@@ -157,7 +185,7 @@ export default function Registration() {
       </section>
 
       {/* Form Section */}
-      <section className="py-6 px-4 sm:px-6 lg:px-8 pb-20"> {/* Added pb-20 for footer spacing */}
+      <section className="py-6 px-4 sm:px-6 lg:px-8 pb-20">
         <div className="max-w-3xl mx-auto">
           <div className="bg-white p-6 rounded-2xl shadow-xl border border-purple-100 transform transition-all hover:shadow-2xl">
             {success && (
@@ -165,11 +193,6 @@ export default function Registration() {
             )}
             {error && (
               <p className="text-red-600 mb-4 text-center font-medium">{error}</p>
-            )}
-            {showToast && (
-              <div className="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg transform transition-opacity duration-300 opacity-100">
-                Thank you for registering, we shall get in touch with you
-              </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* 1. Full Name */}
@@ -239,7 +262,7 @@ export default function Registration() {
               {/* 5. Book Launch */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  5.  For the Book Launch, select an option below
+                  5. For the Book Launch, select an option below
                 </label>
                 <select
                   name="bookLaunch"
@@ -381,7 +404,7 @@ export default function Registration() {
               {/* 10. Receive Info */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  10. How can we contact you in future? (include an option for don’t contact me) <span className="text-red-500">*</span>
+                  10. How can we contact you in future? <span className="text-red-500">*</span>
                 </label>
                 <div className="space-y-2">
                   <label className="flex items-center">
@@ -428,6 +451,17 @@ export default function Registration() {
                     />
                     <span className="ml-2 text-base text-gray-600">WhatsApp</span>
                   </label>
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="receiveInfo"
+                      value="DontContactme"
+                      checked={formData.receiveInfo.includes("DontContactme")}
+                      onChange={handleChange}
+                      className="h-5 w-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                    />
+                    <span className="ml-2 text-base text-gray-600">Don’t contact me</span>
+                  </label>
                 </div>
               </div>
               <button
@@ -447,13 +481,6 @@ export default function Registration() {
                   'Submit Registration'
                 )}
               </button>
-              {/* <button
-                type="button"
-                onClick={handleShare}
-                className="w-full md:w-auto py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition mx-auto block mt-4"
-              >
-                Share with a Friend
-              </button> */}
             </form>
           </div>
         </div>

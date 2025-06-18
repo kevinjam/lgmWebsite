@@ -283,20 +283,20 @@ export default function MenuComponent() {
                     )}
                   </Menu.Item>
                   <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        href="/book-launch"
-                        className={`${active ? 'bg-purple-100' : ''} block px-4 py-2 text-gray-700 flex items-center`}
-                      >
-                        <Image
-                          src="/images/book/all_yours_icon.png"
-                          alt="Book Icon"
-                          width={20}
-                          height={20}
-                          className="mr-2"
-                        />
-                        PreOrder Book Now
-                      </Link>
+                    {() => (
+                     <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="ml-4"
+        >
+          <Link
+            href="/book-launch"
+            className="flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
+          >
+      
+             PreOrder Book Now
+          </Link>
+        </motion.div>
                     )}
                   </Menu.Item>
                 </Menu.Items>
