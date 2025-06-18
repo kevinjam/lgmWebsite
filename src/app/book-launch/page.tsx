@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -13,6 +13,18 @@ export default function BookLaunch() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const [isShareOpen, setIsShareOpen] = useState(false);
+
+  useEffect(() => {
+    // Load SweetAlert2 script dynamically
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -53,7 +65,6 @@ export default function BookLaunch() {
             url: url
           }).catch(err => console.log('Error sharing:', err));
         } else {
-          // Fallback for browsers that don't support Web Share API
           navigator.clipboard.writeText(url);
           setToast({ message: 'Link copied to clipboard!', type: 'success' });
         }
@@ -344,7 +355,7 @@ export default function BookLaunch() {
                 What <span className="text-purple-600">Readers Say</span>
               </h2>
               <p className="max-w-2xl mx-auto text-lg text-gray-600">
-                Early reviews from those who have previewed &quot;[All Yours]&quot;
+                Early reviews from those who have previewed "[All Yours]"
               </p>
             </motion.div>
             
@@ -379,7 +390,7 @@ export default function BookLaunch() {
                       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                     </svg>
                   </div>
-                  <p className="text-gray-700 mb-6 italic">&quot;{testimonial.quote}&quot;</p>
+                  <p className="text-gray-700 mb-6 italic">"{testimonial.quote}"</p>
                   <div className="flex items-center">
                     <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-800 font-bold mr-4">
                       {testimonial.author.charAt(0)}
@@ -547,12 +558,12 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        name,
-        email,
-        phoneNumber,
-        quantity,
-        paymentMethod,
-        amount: 25000 * quantity // Make sure this is included
+          name,
+          email,
+          phoneNumber,
+          quantity,
+          paymentMethod,
+          amount: 25000 * quantity,
         }),
       });
 
@@ -564,21 +575,43 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
 
       let paymentInstructions = '';
       if (paymentMethod === 'mtn') {
-        paymentInstructions = 'Use MoMo code *165*4*1# to send UGX ' + (25000 * quantity) + ' to +256700123456 (MTN Mobile Money). Use your name and phone number as reference.';
+        paymentInstructions = 'To pay for services a customer dials *165*3# to send UGX ' + (25000 * quantity) + ' to MoMo code 316453. Use your name and phone number as reference.';
       } else if (paymentMethod === 'airtel') {
         paymentInstructions = 'Send UGX ' + (25000 * quantity) + ' to +256700123456 (Airtel Money) via *185#. Use your name and phone number as reference.';
       }
 
       const successMessage = `Thank you, ${name}! ${paymentInstructions} We've sent confirmation details to ${email}. Your signed copy${quantity > 1 ? 'ies' : ''} of "[All Yours]" ${quantity > 1 ? 'are' : 'is'} reserved!`;
-      
-      setToast({ message: successMessage, type: 'success' });
-      setName('');
-      setEmail('');
-      setPhoneNumber('');
-      setQuantity(1);
-      setPaymentMethod('');
-      setErrors({ name: '', email: '', phoneNumber: '', paymentMethod: '' });
-      setTimeout(closeModal, 3000);
+
+      // Show SweetAlert2 modal
+      if (window.Swal) {
+        window.Swal.fire({
+          title: 'Success!',
+          html: successMessage,
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#471396',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            setToast({ message: successMessage, type: 'success' });
+            setName('');
+            setEmail('');
+            setPhoneNumber('');
+            setQuantity(1);
+            setPaymentMethod('');
+            setErrors({ name: '', email: '', phoneNumber: '', paymentMethod: '' });
+            closeModal();
+          }
+        });
+      } else {
+        setToast({ message: successMessage, type: 'success' });
+        setName('');
+        setEmail('');
+        setPhoneNumber('');
+        setQuantity(1);
+        setPaymentMethod('');
+        setErrors({ name: '', email: '', phoneNumber: '', paymentMethod: '' });
+        closeModal();
+      }
     } catch (error) {
       setToast({ message: (error as Error).message || 'An error occurred. Please try again.', type: 'error' });
     } finally {
@@ -587,7 +620,7 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
   };
 
   return (
-      <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
           Full Name <span className="text-red-500">*</span>
@@ -669,6 +702,7 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
           <option value="mtn">MTN Mobile Money (MoMo)</option>
           <option value="airtel">Airtel Money</option>
         </select>
+        {errors.paymentMethod && <p id="payment-error" className="mt-1 text-sm text-red-600">{errors.paymentMethod}</p>}
       </div>
       
       <div className="bg-purple-50 p-4 rounded-lg">
@@ -681,7 +715,7 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
           <span className="text-purple-700">UGX {25000 * quantity}</span>
         </div>
       </div>
-<div className="flex justify-end gap-4 pt-4">
+      <div className="flex justify-end gap-4 pt-4">
         <button
           type="button"
           onClick={closeModal}
