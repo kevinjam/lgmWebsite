@@ -27,8 +27,8 @@ export const metadata = {
       { url: '/favicon.ico' },
       { url: '/images/icons/192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/images/icons/512x512.png', sizes: '512x512', type: 'image/png' },
-      { url: '/images/icons/16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/images/icons/32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/icons/96x96.png', sizes: '96x96', type: 'image/png' },
+      
     ],
     apple: '/images/icons/apple-touch-icon.png',
     shortcut: '/favicon.ico'

@@ -133,20 +133,28 @@ export default function Registration() {
     }
   };
 
-  const handleShare = () => {
-    const shareMessage = `Hey, register to attend 25 Silver Jubilee Celebration\nhttps://latterglory.ug/registration\nCelebrate 25 years of ministry with a special jubilee service, music, and community fellowship.`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+const handleShare = () => {
+  const title = '25 Silver Jubilee Celebration';
+  const url = 'https://latterglory.ug/registration';
+  const text = 'Celebrate 25 years of ministry with a special jubilee service, music, and community fellowship.';
+  
+  const shareMessage = `Hey, register to attend ${title}\n${url}\n${text}`;
 
-    if (navigator.share) {
-      navigator.share({
-        title: '25 Silver Jubilee Celebration',
-        text: shareMessage,
-        url: 'https://latterglory.ug/registration',
-      }).catch((error) => console.error('Error sharing:', error));
-    } else {
-      window.open(whatsappUrl, '_blank');
-    }
-  };
+  if (navigator.share) {
+    // Web Share API (modern browsers)
+    navigator.share({
+      title,
+      text: shareMessage,
+      url
+    }).catch((error) => console.error('Error sharing:', error));
+  } else if (navigator.userAgent.match(/WhatsApp/i)) {
+    // WhatsApp web
+    window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`, '_blank');
+  } else {
+    // Fallback for other browsers/devices
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareMessage)}`, '_blank');
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans relative">
@@ -250,7 +258,7 @@ export default function Registration() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  5.Order your copy of All Yours by Pr. Dennis Kasirye.
+                  5.Purchase a Book [All Yours] By Pr. Dennis Kasirye
                 </label>
                 <div className="flex space-x-4 mb-2">
                   <label className="flex items-center">
