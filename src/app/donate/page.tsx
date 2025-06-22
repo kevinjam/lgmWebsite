@@ -93,8 +93,8 @@ const DonatePage = () => {
                         </div>
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-sm text-gray-600">Send to number:</p>
-                            <p className="text-lg font-mono font-bold">0782 461 402</p>
+                            <p className="text-sm text-gray-600">Send to momo</p>
+                            <p className="text-lg font-mono font-bold">316453</p>
                           </div>
                           <button
                             onClick={() => copyToClipboard('0782461402', 'MTN Number')}

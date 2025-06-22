@@ -206,7 +206,7 @@ export default function BookLaunch() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
-                  Reserve Signed Copy
+                  PreOrder Here
                 </motion.button>
                 
                 <motion.button
@@ -335,7 +335,7 @@ export default function BookLaunch() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Reserve Your Signed Copy Now
+                PreOrder Here
               </motion.button>
             </div>
           </div>
@@ -417,7 +417,7 @@ export default function BookLaunch() {
             >
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to Begin Your Spiritual Journey?</h2>
               <p className="text-xl mb-10 max-w-3xl mx-auto">
-                Reserve your signed copy of &quot;[All Yours]&quot; today and embark on a transformative experience with God.
+                PreOrder your signed copy of &quot;[All Yours]&quot; today and embark on a transformative experience with God.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.button
@@ -426,7 +426,7 @@ export default function BookLaunch() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Reserve Now (UGX 25,000)
+                  PreOrder Now (UGX 25,000)
                 </motion.button>
                 <motion.button
                   onClick={toggleShare}
@@ -462,7 +462,7 @@ export default function BookLaunch() {
               
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  Reserve Your Signed Copy
+                  PreOrder Your Signed Copy
                 </h2>
                 <p className="text-gray-600 mt-2">
                   Fill this form to secure your signed copy of &quot;[All Yours]&quot;
@@ -575,12 +575,12 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
 
       let paymentInstructions = '';
       if (paymentMethod === 'mtn') {
-        paymentInstructions = 'To pay for services a customer dials *165*3# to send UGX ' + (25000 * quantity) + ' to MoMo code 316453. Use your name and phone number as reference.';
+        paymentInstructions = '\n To pay dial *165*3# to send UGX ' + (25000 * quantity) + ' to MoMo code 316453. \n Use your name and phone number as reference.';
       } else if (paymentMethod === 'airtel') {
         paymentInstructions = 'Send UGX ' + (25000 * quantity) + ' to +256756623877 (Airtel Money) via *185#. Use your name and phone number as reference.';
       }
 
-      const successMessage = `Thank you, ${name}! ${paymentInstructions} We've sent confirmation details to ${email}. Your signed copy${quantity > 1 ? 'ies' : ''} of "[All Yours]" ${quantity > 1 ? 'are' : 'is'} reserved!`;
+      const successMessage = `Thank you, ${name} \n! ${paymentInstructions} We've sent confirmation details to ${email}. Your signed cop${quantity > 1 ? 'ies' : ''} of "[All Yours]" ${quantity > 1 ? 'are' : 'is'} reserved!`;
 
       // Show SweetAlert2 modal
       if (window.Swal) {
@@ -673,7 +673,7 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
       </div>
       <div>
         <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
-          Quantity
+          No. of Copies
         </label>
         <select
           id="quantity"

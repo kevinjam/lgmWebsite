@@ -16,6 +16,7 @@ interface Scripture {
 interface VisionMission {
   vision: string;
   mission: string;
+  mandate:string;
 }
 
 interface CoreValue {
@@ -59,13 +60,27 @@ const ImageCard = ({ src, alt, onClick }: { src: string; alt: string; onClick: (
 );
 
 // Content Card Component
-const ContentCard = ({ icon, title, text }: { icon: React.ReactNode; title: string; text?: string }) => (
+const ContentCard = ({
+  icon,
+  title,
+  text,
+  children,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  text?: string;
+  children?: React.ReactNode;
+}) => (
   <div className="rounded-lg border-l-4 border-purple-500 bg-white p-4 shadow">
     <div className="mb-2 flex items-center gap-2">
       {icon}
       <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
     </div>
-    <p className="text-gray-600 text-sm">{text}</p>
+    {children ? (
+      <div className="text-gray-600 text-sm">{children}</div>
+    ) : (
+      <p className="text-gray-600 text-sm">{text}</p>
+    )}
   </div>
 );
 
@@ -267,6 +282,20 @@ export default function Home() {
                 <div className="space-y-4">
                   <ContentCard icon={<EyeIcon className="h-5 w-5 text-purple-600" />} title="Vision" text={visionMission?.vision} />
                   <ContentCard icon={<FlagIcon className="h-5 w-5 text-purple-600" />} title="Mission" text={visionMission?.mission} />
+                  
+                  <ContentCard 
+  icon={<FlagIcon className="h-5 w-5 text-purple-600" />} 
+  title="Mandate"
+>
+  <ol className="list-decimal list-inside space-y-1 text-gray-700">
+    {visionMission?.mandate?.split('\n').map((line, index) => (
+      <li key={index}>{line.trim()}</li>
+    ))}
+  </ol>
+<a href="#" className="text-purple-600 hover:underline">view more</a>
+</ContentCard>
+
+
                 </div>
               )}
             </div>

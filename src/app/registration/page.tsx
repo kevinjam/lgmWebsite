@@ -42,7 +42,6 @@ export default function Registration() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Load SweetAlert2 script dynamically
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
     script.async = true;
@@ -74,9 +73,8 @@ export default function Registration() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
 
-    // Validate required fields
     if (!formData.fullName) {
       setError('Full name is required.');
       return;
@@ -112,7 +110,6 @@ export default function Registration() {
           hearAboutEvent: '',
           receiveInfo: [],
         });
-        // Show SweetAlert2 modal
         if (window.Swal) {
           window.Swal.fire({
             title: 'Thank You!',
@@ -153,7 +150,6 @@ export default function Registration() {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans relative">
-      {/* Hero Section with Slide Animation and Share Button */}
       <section className="relative w-full overflow-hidden">
         <div className="animate-slide bg-gradient-to-br from-purple-900 to-blue-800 h-40 flex items-center justify-center relative">
           <div className="text-center px-4">
@@ -184,7 +180,6 @@ export default function Registration() {
         </div>
       </section>
 
-      {/* Form Section */}
       <section className="py-6 px-4 sm:px-6 lg:px-8 pb-20">
         <div className="max-w-3xl mx-auto">
           <div className="bg-white p-6 rounded-2xl shadow-xl border border-purple-100 transform transition-all hover:shadow-2xl">
@@ -195,7 +190,6 @@ export default function Registration() {
               <p className="text-red-600 mb-4 text-center font-medium">{error}</p>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* 1. Full Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   1. Full Name <span className="text-red-500">*</span>
@@ -210,7 +204,6 @@ export default function Registration() {
                   required
                 />
               </div>
-              {/* 2. Phone Number or Email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   2. Phone or Email
@@ -222,12 +215,12 @@ export default function Registration() {
                   onChange={handleChange}
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
                   placeholder="Enter your phone number or email"
+                  required
                 />
               </div>
-              {/* 3. Children Attending */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  3. How many children 10years and below do you plan to come with?
+                  3. How many children 10 years and below do you plan to come with?
                 </label>
                 <input
                   type="number"
@@ -237,10 +230,8 @@ export default function Registration() {
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
                   min="0"
                   placeholder="Enter number of children (10 years & below)"
-               
                 />
               </div>
-              {/* 4. Event Time */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   4. What time do you plan to arrive?
@@ -257,28 +248,52 @@ export default function Registration() {
                   <option value="Other">Other</option>
                 </select>
               </div>
-              {/* 5. Book Launch */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  5. For the Book Launch, select an option below
+                  5. For the Book Launch
                 </label>
-                <select
-                  name="bookLaunch"
-                  value={formData.bookLaunch}
-                  onChange={handleChange}
-                  className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base appearance-none bg-white"
-             
-                >
-                  <option value="">Select an option</option>
-                  <option value="Autographed in advance (Pay via mobile money)">
-                    Autographed in advance (Pay via mobile money)
-                  </option>
-                  <option value="Multiple copies">Multiple copies (Enter number below)</option>
-                  <option value="Souvenir/gift package">Souvenir/gift package</option>
-                  <option value="Autograph on site or none (Pay on event day)">
-                    Autograph on site or none (Pay on event day)
-                  </option>
-                </select>
+                <div className="flex space-x-4 mb-2">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="bookLaunch"
+                      value="Yes"
+                      checked={formData.bookLaunch === 'Yes'}
+                      onChange={handleChange}
+                      className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500"
+                    />
+                    <span className="ml-2 text-base text-gray-600">Yes</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="bookLaunch"
+                      value="No"
+                      checked={formData.bookLaunch === 'No'}
+                      onChange={handleChange}
+                      className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500"
+                    />
+                    <span className="ml-2 text-base text-gray-600">No</span>
+                  </label>
+                </div>
+                {formData.bookLaunch === 'Yes' && (
+                  <select
+                    name="bookLaunch"
+                    value={formData.bookLaunch}
+                    onChange={handleChange}
+                    className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base appearance-none bg-white"
+                  >
+                    <option value="Yes">Select an option</option>
+                    <option value="Autographed in advance (Pay via mobile money)">
+                      Autographed in advance (Pay via mobile money)
+                    </option>
+                    <option value="Multiple copies">Multiple copies (Enter number below)</option>
+                    <option value="Souvenir/gift package">Souvenir/gift package</option>
+                    <option value="Thank you, but I’ll not buy for now">
+                      Thank you, but I’ll not buy for now
+                    </option>
+                  </select>
+                )}
                 {formData.bookLaunch === 'Multiple copies' && (
                   <div className="mt-2">
                     <label className="block text-sm text-gray-600 mb-1">Number of Copies</label>
@@ -289,12 +304,10 @@ export default function Registration() {
                       onChange={handleChange}
                       className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
                       min="2"
-                      
                     />
                   </div>
                 )}
               </div>
-              {/* 6. Shuttle Service */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   6. Need Shuttle from Rubaga?
@@ -308,7 +321,6 @@ export default function Registration() {
                       checked={formData.shuttleService === 'Yes'}
                       onChange={handleChange}
                       className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500 text-gray-900"
-                      
                     />
                     <span className="ml-2 text-base text-gray-600">Yes</span>
                   </label>
@@ -325,21 +337,45 @@ export default function Registration() {
                   </label>
                 </div>
               </div>
-              {/* 7. Food Allergies */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   7. Food Allergies?
                 </label>
-                <textarea
-                  name="foodAllergies"
-                  value={formData.foodAllergies}
-                  onChange={handleChange}
-                  className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
-                  rows={2}
-                  
-                />
+                <div className="flex space-x-4 mb-2">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="foodAllergies"
+                      value="Yes"
+                      checked={formData.foodAllergies === 'Yes'}
+                      onChange={handleChange}
+                      className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500"
+                    />
+                    <span className="ml-2 text-base text-gray-600">Yes</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="foodAllergies"
+                      value="No"
+                      checked={formData.foodAllergies === 'No'}
+                      onChange={handleChange}
+                      className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500"
+                    />
+                    <span className="ml-2 text-base text-gray-600">No</span>
+                  </label>
+                </div>
+                {formData.foodAllergies === 'Yes' && (
+                  <textarea
+                    name="foodAllergies"
+                    value={formData.foodAllergies}
+                    onChange={handleChange}
+                    className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
+                    rows={2}
+                    placeholder="Please specify your food allergies"
+                  />
+                )}
               </div>
-              {/* 8. Contribution */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   8. Contribute to Event?
@@ -353,7 +389,6 @@ export default function Registration() {
                       checked={formData.contribution === 'No'}
                       onChange={handleChange}
                       className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500 text-gray-900"
-                      
                     />
                     <span className="ml-2 text-base text-gray-600">No, thanks</span>
                   </label>
@@ -380,7 +415,6 @@ export default function Registration() {
                   </div>
                 </div>
               </div>
-              {/* 9. Hear About Event */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   9. How did you hear about this event?
@@ -390,7 +424,6 @@ export default function Registration() {
                   value={formData.hearAboutEvent}
                   onChange={handleChange}
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base appearance-none bg-white"
-                  
                 >
                   <option value="">Select</option>
                   <option value="Website/Church">Website or Church</option>
@@ -399,7 +432,6 @@ export default function Registration() {
                   <option value="Other">Other</option>
                 </select>
               </div>
-              {/* 10. Receive Info */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   10. How can we contact you in future? <span className="text-red-500">*</span>
@@ -487,7 +519,6 @@ export default function Registration() {
   );
 }
 
-// CSS Animation for slide effect
 const styles = `
   @keyframes slide {
     0% { transform: translateX(-100%); }
