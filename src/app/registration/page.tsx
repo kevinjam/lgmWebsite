@@ -81,10 +81,10 @@ export default function Registration() {
       setError('Full name is required.');
       return;
     }
-    if (!formData.receiveInfo.length) {
-      setError('Please select at least one preferred method for info updates.');
-      return;
-    }
+    // if (!formData.receiveInfo.length) {
+    //   setError('Please select at least one preferred method for info updates.');
+    //   return;
+    // }
 
     setLoading(true);
     setSuccess(false);
@@ -222,7 +222,6 @@ export default function Registration() {
                   onChange={handleChange}
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
                   placeholder="Enter your phone number or email"
-                  required
                 />
               </div>
               {/* 3. Children Attending */}
@@ -238,7 +237,7 @@ export default function Registration() {
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
                   min="0"
                   placeholder="Enter number of children (10 years & below)"
-                  required
+               
                 />
               </div>
               {/* 4. Event Time */}
@@ -251,7 +250,6 @@ export default function Registration() {
                   value={formData.eventTime}
                   onChange={handleChange}
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base appearance-none bg-white"
-                  required
                 >
                   <option value="">Select</option>
                   <option value="I will keep time">I will keep time</option>
@@ -269,7 +267,7 @@ export default function Registration() {
                   value={formData.bookLaunch}
                   onChange={handleChange}
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base appearance-none bg-white"
-                  required
+             
                 >
                   <option value="">Select an option</option>
                   <option value="Autographed in advance (Pay via mobile money)">
@@ -291,7 +289,7 @@ export default function Registration() {
                       onChange={handleChange}
                       className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
                       min="2"
-                      required
+                      
                     />
                   </div>
                 )}
@@ -310,7 +308,7 @@ export default function Registration() {
                       checked={formData.shuttleService === 'Yes'}
                       onChange={handleChange}
                       className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500 text-gray-900"
-                      required
+                      
                     />
                     <span className="ml-2 text-base text-gray-600">Yes</span>
                   </label>
@@ -338,7 +336,7 @@ export default function Registration() {
                   onChange={handleChange}
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base"
                   rows={2}
-                  required
+                  
                 />
               </div>
               {/* 8. Contribution */}
@@ -355,7 +353,7 @@ export default function Registration() {
                       checked={formData.contribution === 'No'}
                       onChange={handleChange}
                       className="h-5 w-5 text-purple-600 border-gray-300 focus:ring-purple-500 text-gray-900"
-                      required
+                      
                     />
                     <span className="ml-2 text-base text-gray-600">No, thanks</span>
                   </label>
@@ -392,7 +390,7 @@ export default function Registration() {
                   value={formData.hearAboutEvent}
                   onChange={handleChange}
                   className="w-full p-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-600 text-gray-900 text-base appearance-none bg-white"
-                  required
+                  
                 >
                   <option value="">Select</option>
                   <option value="Website/Church">Website or Church</option>

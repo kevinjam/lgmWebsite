@@ -79,8 +79,8 @@ export default function BookLaunch() {
         <meta name="description" content="Join us for the launch of '[All Yours]' by Pr. Dennis Kasirye on July 5, 2025. Reserve your signed copy today!" />
         <meta property="og:title" content="Book Launch: [All Yours] by Pr. Dennis Kasirye" />
         <meta property="og:description" content="Join us for the launch of '[All Yours]' by Pr. Dennis Kasirye on July 5, 2025. Reserve your signed copy today!" />
-        <meta property="og:image" content="https://example.com/book-cover.jpg" />
-        <meta property="og:url" content="https://example.com/book-launch" />
+        <meta property="og:image" content="https://latterglory.com/book-cover.jpg" />
+        <meta property="og:url" content="https://latterglory.com/book-launch" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
@@ -577,7 +577,7 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
       if (paymentMethod === 'mtn') {
         paymentInstructions = 'To pay for services a customer dials *165*3# to send UGX ' + (25000 * quantity) + ' to MoMo code 316453. Use your name and phone number as reference.';
       } else if (paymentMethod === 'airtel') {
-        paymentInstructions = 'Send UGX ' + (25000 * quantity) + ' to +256700123456 (Airtel Money) via *185#. Use your name and phone number as reference.';
+        paymentInstructions = 'Send UGX ' + (25000 * quantity) + ' to +256756623877 (Airtel Money) via *185#. Use your name and phone number as reference.';
       }
 
       const successMessage = `Thank you, ${name}! ${paymentInstructions} We've sent confirmation details to ${email}. Your signed copy${quantity > 1 ? 'ies' : ''} of "[All Yours]" ${quantity > 1 ? 'are' : 'is'} reserved!`;
