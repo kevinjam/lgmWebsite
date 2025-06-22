@@ -250,7 +250,7 @@ export default function Registration() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  5. For the Book Launch
+                  5.Order your copy of All Yours by Pr. Dennis Kasirye.
                 </label>
                 <div className="flex space-x-4 mb-2">
                   <label className="flex items-center">
