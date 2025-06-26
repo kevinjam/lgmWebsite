@@ -162,9 +162,9 @@ const DonatePage = () => {
                         <div className="flex justify-between">
                           <span className="text-sm text-gray-600">Account Name:</span>
                           <div className="flex items-center">
-                            <span className="font-mono font-medium">Latter Glory Ministries</span>
+                            <span className="font-mono font-medium">Latter Glory Ministries International</span>
                             <button
-                              onClick={() => copyToClipboard('Latter Glory Ministries', 'Account Name')}
+                              onClick={() => copyToClipboard('Latter Glory Ministries International', 'Account Name')}
                               className="ml-2 text-purple-600 hover:text-purple-800"
                             >
                               <DocumentDuplicateIcon className="w-4 h-4" />
@@ -174,9 +174,10 @@ const DonatePage = () => {
                         <div className="flex justify-between">
                           <span className="text-sm text-gray-600">Account Number:</span>
                           <div className="flex items-center">
-                            <span className="font-mono font-medium">01024567890</span>
+                            <span className="font-mono font-medium">UGX: 0152002456600</span>
+                            <span className="font-mono font-medium">USD: 8702802456600</span>
                             <button
-                              onClick={() => copyToClipboard('01024567890', 'Account Number')}
+                              onClick={() => copyToClipboard('0152002456600', 'Account Number')}
                               className="ml-2 text-purple-600 hover:text-purple-800"
                             >
                               <DocumentDuplicateIcon className="w-4 h-4" />
