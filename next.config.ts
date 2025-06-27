@@ -11,6 +11,9 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   reactStrictMode: true,
+  env: {
+    MTN_MOMO_API_KEY: process.env.MTN_MOMO_API_KEY,
+  },
   images: {
     domains: ["imageplaceholder.net","img.youtube.com"], // Add the external domain here
   },
