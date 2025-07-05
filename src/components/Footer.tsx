@@ -53,7 +53,7 @@ export default function Footer() {
             <li className="flex items-center">
               <EnvelopeIcon className="w-5 h-5 mr-2 text-white" />
               <a href="mailto:contact@lgm.org" className="hover:text-white transition">
-                contact@lgm.ug
+                info@latterglory.ug
               </a>
             </li>
             <li className="flex items-center">

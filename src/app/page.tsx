@@ -29,7 +29,7 @@ interface ImageData {
   alt: string;
 }
 
-const iconMap: { [key: string]: React.ComponentType<{ className: string }> } = {
+const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
   HeartIcon,
   ShieldCheckIcon,
   SparklesIcon,
