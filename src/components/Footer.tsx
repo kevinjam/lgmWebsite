@@ -52,8 +52,8 @@ export default function Footer() {
             </li>
             <li className="flex items-center">
               <EnvelopeIcon className="w-5 h-5 mr-2 text-white" />
-              <a href="mailto:contact@lgm.org" className="hover:text-white transition">
-                contact@lgm.ug
+              <a href="mailto:info@latterglory.ug" className="hover:text-white transition">
+                info@latterglory.ug
               </a>
             </li>
             <li className="flex items-center">
@@ -65,14 +65,14 @@ export default function Footer() {
           </ul>
           <div className="flex space-x-4 mt-4">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/LGMUG"
               aria-label="Facebook"
               className="text-white hover:text-white transition transform hover:scale-110"
             >
               <FacebookIcon className="w-6 h-6" />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/LGM_UG"
               aria-label="Twitter"
               className="text-white hover:text-white transition transform hover:scale-110"
             >

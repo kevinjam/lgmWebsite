@@ -196,7 +196,6 @@ export default function Home() {
           throw new Error(`Vision/Mission fetch failed: ${visionMissionRes.status}`);
         }
         const visionMissionData = await visionMissionRes.json();
-        console.log('Fetched visionMission:', visionMissionData);
         setVisionMission(visionMissionData);
 
         // Fetch core values
@@ -205,7 +204,6 @@ export default function Home() {
           throw new Error(`Core Values fetch failed: ${coreValuesRes.status}`);
         }
         const coreValuesData = await coreValuesRes.json();
-        console.log('Fetched coreValues:', coreValuesData);
         setCoreValues(coreValuesData);
 
         if (scripturesData.length === 0) {
