@@ -172,7 +172,7 @@ export default function MenuComponent() {
             className="flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
           >
       
-             PreOrder Book
+             Order Book
           </Link>
         </motion.div>
       </div>
