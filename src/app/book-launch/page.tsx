@@ -7,6 +7,13 @@ import Image from 'next/image';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
+// Extend the Window interface to include Swal as SweetAlert2's default export type
+declare global {
+  interface Window {
+    Swal?: typeof import('sweetalert2')['default'] | undefined;
+  }
+}
+
 export default function BookLaunch() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toast, setToast] = useState({ message: '', type: '' });
@@ -584,15 +591,21 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
 
       // Show SweetAlert2 modal
       if (window.Swal) {
+
+        interface Toast {
+          message: string;
+          type: string;
+        }
+
         window.Swal.fire({
           title: 'Success!',
           html: successMessage,
           icon: 'success',
           confirmButtonText: 'OK',
           confirmButtonColor: '#471396',
-        }).then((result) => {
+        }).then((result: import('sweetalert2').SweetAlertResult) => {
           if (result.isConfirmed) {
-            setToast({ message: successMessage, type: 'success' });
+            setToast({ message: successMessage, type: 'success' } as Toast);
             setName('');
             setEmail('');
             setPhoneNumber('');
