@@ -7,6 +7,13 @@ import Image from 'next/image';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
+// Extend the Window interface to include Swal as SweetAlert2's default export type
+declare global {
+  interface Window {
+    Swal?: typeof import('sweetalert2')['default'] | undefined;
+  }
+}
+
 export default function BookLaunch() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toast, setToast] = useState({ message: '', type: '' });
@@ -206,7 +213,7 @@ export default function BookLaunch() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
-                  PreOrder Here
+                  Order Here
                 </motion.button>
                 
                 <motion.button
@@ -335,7 +342,7 @@ export default function BookLaunch() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                PreOrder Here
+                Order Here
               </motion.button>
             </div>
           </div>
@@ -417,7 +424,7 @@ export default function BookLaunch() {
             >
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to Begin Your Spiritual Journey?</h2>
               <p className="text-xl mb-10 max-w-3xl mx-auto">
-                PreOrder your signed copy of &quot;[All Yours]&quot; today and embark on a transformative experience with God.
+                Order your signed copy of &quot;[All Yours]&quot; today and embark on a transformative experience with God.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.button
@@ -426,7 +433,7 @@ export default function BookLaunch() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  PreOrder Now (UGX 25,000)
+                  Order Now (UGX 25,000)
                 </motion.button>
                 <motion.button
                   onClick={toggleShare}
@@ -462,7 +469,7 @@ export default function BookLaunch() {
               
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  PreOrder Your Signed Copy
+                  Order Your Signed Copy
                 </h2>
                 <p className="text-gray-600 mt-2">
                   Fill this form to secure your signed copy of &quot;[All Yours]&quot;
@@ -584,15 +591,21 @@ function BookPurchaseForm({ closeModal, setToast }: { closeModal: () => void; se
 
       // Show SweetAlert2 modal
       if (window.Swal) {
+
+        interface Toast {
+          message: string;
+          type: string;
+        }
+
         window.Swal.fire({
           title: 'Success!',
           html: successMessage,
           icon: 'success',
           confirmButtonText: 'OK',
           confirmButtonColor: '#471396',
-        }).then((result) => {
+        }).then((result: import('sweetalert2').SweetAlertResult) => {
           if (result.isConfirmed) {
-            setToast({ message: successMessage, type: 'success' });
+            setToast({ message: successMessage, type: 'success' } as Toast);
             setName('');
             setEmail('');
             setPhoneNumber('');

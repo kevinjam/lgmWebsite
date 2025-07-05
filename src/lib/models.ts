@@ -203,6 +203,30 @@ export interface IContact{
   createdAt: Date;
 }
 
+export interface ITransaction {
+  _id:object;
+  externalId: string;
+  financialTransactionId?: string;
+  status: 'SUCCESSFUL' | 'FAILED' | 'PENDING';
+  amount?: string;
+  currency?: string;
+  payer?: {
+    partyIdType: string;
+    partyId: string;
+  };
+  payerMessage?: string;
+  payeeNote?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface IMtnMomoCredential {
+  apiUserId: string;
+  apiKey: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 // Define schemas
 const donationSchema = new Schema<IDonation>({
   name: { type: String, required: true, default: 'Anonymous' },
@@ -213,6 +237,8 @@ const donationSchema = new Schema<IDonation>({
   status: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
+
+
 
 const ministrySignupSchema = new Schema<IMinistrySignup>({
   name: { type: String, required: true },
@@ -400,6 +426,34 @@ const ContactSchema = new Schema<IContact>(
 );
 
 
+const TransactionSchema = new Schema<ITransaction>(
+  {
+    _id: { type: String, required: false },
+    externalId: { type: String, required: true },
+    financialTransactionId: { type: String },
+    status: { type: String, required: true },
+    amount: { type: String, required: true },
+    currency: { type: String, required: true },
+    payer: {
+      partyIdType: { type: String, required: true },
+      partyId: { type: String, required: true },
+    },
+    payerMessage: { type: String, required: true },
+    payeeNote: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
+  },
+  { _id: false } // Disable default _id to prevent ObjectId casting
+);
+
+const MtnMomoCredentialSchema = new Schema<IMtnMomoCredential>({
+  apiUserId: { type: String, required: true, unique: true },
+  apiKey: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
+
+
 // Define models
 export const Donation: Model<IDonation> = mongoose.models.Donation || mongoose.model<IDonation>('Donation', donationSchema);
 export const MinistrySignup: Model<IMinistrySignup> = mongoose.models.MinistrySignup || mongoose.model<IMinistrySignup>('MinistrySignup', ministrySignupSchema);
@@ -426,3 +480,8 @@ export const MarketPlaceMinistryInterest: Model<IMarketPlaceMinistryInterest> = 
 export const BookPurchase: Model<IBookPurchase> = mongoose.models.BookPurchase || mongoose.model<IBookPurchase>('BookPurchase', BookPurchaseSchema, 'book_purchases');
 
 export const Contact: Model<IContact> = mongoose.models.Contact || mongoose.model<IContact>('Contact', ContactSchema, 'contacts');
+
+export const Transaction: Model<ITransaction> = mongoose.models.Transaction || mongoose.model<ITransaction>('Transaction', TransactionSchema, 'transactions');
+
+export const MtnMomoCredential = mongoose.models.MtnMomoCredential || mongoose.model<IMtnMomoCredential>('MtnMomoCredential', MtnMomoCredentialSchema);
+

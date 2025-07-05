@@ -196,7 +196,6 @@ export default function Home() {
           throw new Error(`Vision/Mission fetch failed: ${visionMissionRes.status}`);
         }
         const visionMissionData = await visionMissionRes.json();
-        console.log('Fetched visionMission:', visionMissionData);
         setVisionMission(visionMissionData);
 
         // Fetch core values
@@ -205,7 +204,6 @@ export default function Home() {
           throw new Error(`Core Values fetch failed: ${coreValuesRes.status}`);
         }
         const coreValuesData = await coreValuesRes.json();
-        console.log('Fetched coreValues:', coreValuesData);
         setCoreValues(coreValuesData);
 
         if (scripturesData.length === 0) {
@@ -306,14 +304,14 @@ export default function Home() {
       {/* Core Values */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* <motion.h2
+          <motion.h2
             className="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
             Core Values
-          </motion.h2> */}
+          </motion.h2>
           {loading && <p className="text-center text-gray-600">Loading...</p>}
           {error && coreValues.length === 0 && <p className="text-center text-red-600">{error}</p>}
           {coreValues.length > 0 && (

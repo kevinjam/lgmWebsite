@@ -5,7 +5,6 @@ import Slider from 'react-slick';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import QRCode from 'react-qr-code';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -118,24 +117,7 @@ export default function HeroSlider() {
                   </motion.div>
                 </div>
                 {/* QR Code in Bottom-Right Corner */}
-                <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 bg-white p-3 rounded-lg shadow-lg flex flex-col items-center z-20">
-                  <p className="text-gray-900 text-xs sm:text-sm font-medium mb-2">
-                    Register for Silver Jubilee
-                  </p>
-                  <QRCode
-                    value="https://www.latterglory.ug/registration"
-                    size={80}
-                    bgColor="#FFFFFF"
-                    fgColor="#790DA3"
-                    level="H"
-                  />
-                  <Link
-                    href="/registration"
-                    className="text-purple-600 hover:underline text-xs sm:text-sm mt-2"
-                  >
-                    Go to Form
-                  </Link>
-                </div>
+               
               </div>
             </div>
           ))}
