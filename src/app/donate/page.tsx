@@ -1,65 +1,20 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { CreditCardIcon, BanknotesIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import { MtnIcon } from '@/components/PaymentIcons/MtnIcon';
 import { AirtelIcon } from '@/components/PaymentIcons/AirtelIcon';
 import { PaypalIcon } from '@/components/PaymentIcons/PaypalIcon';
-
 const DonatePage = () => {
   const [activeTab, setActiveTab] = useState<'mobileMoney' | 'bank' | 'paypal'>('mobileMoney');
   const [copied, setCopied] = useState<string | null>(null);
-  const [amount, setAmount] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
-  // const [transactionId, setTransactionId] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
     setCopied(label);
     setTimeout(() => setCopied(null), 2000);
   };
-
-  const handleMtnMoMoPayment = async () => {
-    if (!amount || !phoneNumber) {
-      setPaymentStatus('Please enter amount and phone number');
-      setModalOpen(true);
-      return;
-    }
-
-    setIsLoading(true);
-    setModalOpen(true);
-    setPaymentStatus(null);
-    // setTransactionId(null);
-
-    try {
-      const response = await fetch('/api/mtn-momo-payment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount, phoneNumber }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setPaymentStatus('Payment request sent. Please check your phone to authorize the payment with your PIN.');
-        // setTransactionId(data.transactionId);
-      } else {
-        setPaymentStatus(`Payment failed: ${data.error || 'Unknown error'}`);
-      }
-    } catch {
-      setPaymentStatus('Error processing payment. Please try again or contact support.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // const handleCheckStatus = () => {
-  //   if (transactionId) {
-  //     window.location.href = `/admin?transactionId=${transactionId}`;
-  //   }
-  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -99,7 +54,7 @@ const DonatePage = () => {
             >
               <div className="p-6 sm:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Donation Methods</h2>
-
+                
                 {/* Payment Method Tabs */}
                 <div className="mb-6 border-b border-gray-200">
                   <nav className="flex space-x-8">
@@ -133,36 +88,27 @@ const DonatePage = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <div className="flex-1 bg-purple-50 p-4 rounded-lg">
                         <div className="flex items-center mb-3">
-                          <MtnIcon className="w-8 h-8 text-[#FFD700] mr-3" />
+                          <MtnIcon className="w-8 h-8 text-yellow-500 mr-3" />
                           <h3 className="text-lg font-semibold text-gray-900">MTN MoMo</h3>
                         </div>
-                        <div>
-                          <input
-                            type="number"
-                            placeholder="Enter amount (UGX)"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#fcbf49]"
-                          />
-                          <input
-                            type="tel"
-                            placeholder="Enter phone number (e.g., 752123456)"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#fcbf49]"
-                          />
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-sm text-gray-600">Send to momo</p>
+                            <p className="text-lg font-mono font-bold">316453</p>
+                          </div>
                           <button
-                            onClick={handleMtnMoMoPayment}
-                            className="w-full py-2 bg-[#e09f3e] text-white rounded hover:bg-[#fcbf49] transition-colors"
+                            onClick={() => copyToClipboard('0782461402', 'MTN Number')}
+                            className="text-purple-600 hover:text-purple-800 flex items-center text-sm"
                           >
-                            Donate via MTN MoMo
+                            <DocumentDuplicateIcon className="w-4 h-4 mr-1" />
+                            {copied === 'MTN Number' ? 'Copied!' : 'Copy'}
                           </button>
                         </div>
                       </div>
 
                       <div className="flex-1 bg-purple-50 p-4 rounded-lg">
                         <div className="flex items-center mb-3">
-                          <AirtelIcon className="w-8 h-8 text-[#BF2323] mr-3" />
+                          <AirtelIcon className="w-8 h-8 text-red-500 mr-3" />
                           <h3 className="text-lg font-semibold text-gray-900">Airtel Money</h3>
                         </div>
                         <div className="flex items-center justify-between">
@@ -172,7 +118,7 @@ const DonatePage = () => {
                           </div>
                           <button
                             onClick={() => copyToClipboard('0756623877', 'Airtel Number')}
-                            className="text-[#BF2323] hover:text-[#a11e1e] flex items-center text-sm"
+                            className="text-purple-600 hover:text-purple-800 flex items-center text-sm"
                           >
                             <DocumentDuplicateIcon className="w-4 h-4 mr-1" />
                             {copied === 'Airtel Number' ? 'Copied!' : 'Copy'}
@@ -184,8 +130,7 @@ const DonatePage = () => {
                     <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
                       <h4 className="text-sm font-medium text-blue-800 mb-2">How to Donate via Mobile Money:</h4>
                       <ol className="text-sm text-gray-700 space-y-1 list-decimal pl-5">
-                        <li>For MTN MoMo, authorize the payment on your phone after initiating</li>
-                        <li>Or dial *165# (MTN) or *185# (Airtel) and follow manual steps</li>
+                        <li>Dial *165# (MTN) or *185# (Airtel) on your phone</li>
                         <li>Select &quot;Send Money&quot; or &quot;Pay Bill&quot; option</li>
                         <li>Enter our number above as recipient</li>
                         <li>Enter the amount you wish to donate</li>
@@ -208,7 +153,7 @@ const DonatePage = () => {
                             <span className="font-mono font-medium">Standard Chartered Bank Uganda</span>
                             <button
                               onClick={() => copyToClipboard('Standard Chartered Bank Uganda', 'Bank Name')}
-                              className="ml-2 text-[#BF2323] hover:text-[#a11e1e]"
+                              className="ml-2 text-purple-600 hover:text-purple-800"
                             >
                               <DocumentDuplicateIcon className="w-4 h-4" />
                             </button>
@@ -217,34 +162,23 @@ const DonatePage = () => {
                         <div className="flex justify-between">
                           <span className="text-sm text-gray-600">Account Name:</span>
                           <div className="flex items-center">
-                            <span className="font-mono font-medium">Latter Glory Ministries</span>
+                            <span className="font-mono font-medium">Latter Glory Ministries International</span>
                             <button
-                              onClick={() => copyToClipboard('Latter Glory Ministries', 'Account Name')}
-                              className="ml-2 text-[#BF2323] hover:text-[#a11e1e]"
+                              onClick={() => copyToClipboard('Latter Glory Ministries International', 'Account Name')}
+                              className="ml-2 text-purple-600 hover:text-purple-800"
                             >
                               <DocumentDuplicateIcon className="w-4 h-4" />
                             </button>
                           </div>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-sm text-gray-600">Account Number (USD):</span>
+                          <span className="text-sm text-gray-600">Account Number:</span>
                           <div className="flex items-center">
-                            <span className="font-mono font-medium">8702802456600</span>
+                            <span className="font-mono font-medium">UGX: 0152002456600</span>
+                            <span className="font-mono font-medium">USD: 8702802456600</span>
                             <button
-                              onClick={() => copyToClipboard('8702802456600', 'USD Account Number')}
-                              className="ml-2 text-[#BF2323] hover:text-[#a11e1e]"
-                            >
-                              <DocumentDuplicateIcon className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-sm text-gray-600">Account Number (UGX):</span>
-                          <div className="flex items-center">
-                            <span className="font-mono font-medium">0152002456600</span>
-                            <button
-                              onClick={() => copyToClipboard('0152002456600', 'UGX Account Number')}
-                              className="ml-2 text-[#BF2323] hover:text-[#a11e1e]"
+                              onClick={() => copyToClipboard('0152002456600', 'Account Number')}
+                              className="ml-2 text-purple-600 hover:text-purple-800"
                             >
                               <DocumentDuplicateIcon className="w-4 h-4" />
                             </button>
@@ -256,7 +190,7 @@ const DonatePage = () => {
                             <span className="font-mono font-medium">SCBLUGKA</span>
                             <button
                               onClick={() => copyToClipboard('SCBLUGKA', 'SWIFT Code')}
-                              className="ml-2 text-[#BF2323] hover:text-[#a11e1e]"
+                              className="ml-2 text-purple-600 hover:text-purple-800"
                             >
                               <DocumentDuplicateIcon className="w-4 h-4" />
                             </button>
@@ -265,10 +199,10 @@ const DonatePage = () => {
                         <div className="flex justify-between">
                           <span className="text-sm text-gray-600">Branch:</span>
                           <div className="flex items-center">
-                            <span className="font-mono font-medium">City Branch</span>
+                            <span className="font-mono font-medium">Kampala Main Branch</span>
                             <button
-                              onClick={() => copyToClipboard('City Branch', 'Branch')}
-                              className="ml-2 text-[#BF2323] hover:text-[#a11e1e]"
+                              onClick={() => copyToClipboard('Kampala Main Branch', 'Branch')}
+                              className="ml-2 text-purple-600 hover:text-purple-800"
                             >
                               <DocumentDuplicateIcon className="w-4 h-4" />
                             </button>
@@ -297,6 +231,8 @@ const DonatePage = () => {
                       <p className="text-gray-600 mb-4">
                         Make a secure international donation using your PayPal account or credit card.
                       </p>
+                      
+                      {/* PayPal Donation Button - Replace with your actual PayPal button code */}
                       <form action="https://www.paypal.com/ncp/payment/YYPSPLDDB97GN" method="post" target="_blank" className="w-full">
                         <input type="hidden" name="business" value="donations@latterglory.org" />
                         <input type="hidden" name="item_name" value="Latter Glory Ministries Donation" />
@@ -361,7 +297,7 @@ const DonatePage = () => {
               </div>
 
               <div className="bg-purple-50 rounded-xl shadow-lg p-6 sm:p-8">
-                <h3 className="text-xl font-bold text-[#BF2323] mb-4">Need Help?</h3>
+                <h3 className="text-xl font-bold text-purple-800 mb-4">Need Help?</h3>
                 <p className="text-gray-700 mb-4">
                   For any questions about giving or payment issues, please contact our finance team:
                 </p>
@@ -375,56 +311,6 @@ const DonatePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Modal Dialog */}
-      <AnimatePresence>
-        {modalOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              className="bg-white rounded-lg p-6 w-full max-w-md mx-4"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                {isLoading ? 'Processing Payment...' : 'Payment Status'}
-              </h3>
-              {isLoading ? (
-                <div className="flex justify-center items-center mb-4">
-                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#FFD700]"></div>
-                </div>
-              ) : (
-                <p className="text-gray-600 mb-6">{paymentStatus}</p>
-              )}
-              {!isLoading && (
-                <div className="flex justify-end space-x-4">
-                  <button
-                    onClick={() => setModalOpen(false)}
-                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
-                  >
-                    Okay
-                  </button>
-                  {/* {transactionId && (
-                    <button
-                      onClick={handleCheckStatus}
-                      className="px-4 py-2 bg-[#BF2323] text-white rounded hover:bg-[#a11e1e] transition-colors"
-                    >
-                      Check Status
-                    </button>
-                  )} */}
-                </div>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
